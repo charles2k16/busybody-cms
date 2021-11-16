@@ -14,10 +14,16 @@
     label-width="40px"
     class="demo-dynamic"
   >
+  <span class="demo-input-label">Email</span>
+   <el-input v-model="input" placeholder="Please input email"  />
 
+  <span class="demo-input-label">Password</span>
+   <el-input v-model="input" placeholder="Please input password" show-password />
+
+<!-- 
   <el-form-item
       prop="email"
-      label="Email"
+      label="Email" 
       :rules="[
         {
           required: true,
@@ -31,7 +37,7 @@
         },
       ]"
     >
-     </el-form-item>
+     </el-form-item> -->
     </el-form>
  
 </el-card>
