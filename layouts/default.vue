@@ -68,7 +68,7 @@
             <el-dropdown-item>Delete</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>Charles</span>
+        <span>{{ $auth.user.first_name }} </span>
       </el-header>
 
       <el-main>
