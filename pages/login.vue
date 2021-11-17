@@ -23,7 +23,6 @@
 export default {
   name: 'Login',
   layout: 'auth',
-  auth: false,
   data() {
     return {
       loginForm: {
