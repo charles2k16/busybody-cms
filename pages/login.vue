@@ -1,39 +1,38 @@
 <template>
   <div>
-    <h2>login</h2>
-    <p>set up the login input boxes and succefully login</p>
-  
-  <el-card class="box-card">
-  <div slot="header" class="clearfix">
-    <span>Card name</span>
-    <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button>
-  </div>
-  <div v-for="o in 4" :key="o" class="text item">
-    {{'List item ' + o }}
-  </div>
-</el-card>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span>Login</span>
+      </div>
+      <div class="text item">
+        <el-form ref="loginForm" :model="loginForm" label-width="120px">
+          <el-form-item label="Email">
+            <el-input v-model="loginForm.email"></el-input>
+          </el-form-item>
 
-</div>
+          <el-form-item label="Password">
+            <el-input v-model="loginForm.password"></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
+    </el-card>
+  </div>
 </template>
-<style>
-  .text {
-    font-size: 14px;
-  }
 
-  .item {
-    margin-bottom: 18px;
-  }
+<script>
+export default {
+  name: 'Login',
+  layout: 'auth',
+  auth: false,
+  data() {
+    return {
+      loginForm: {
+        email: '',
+        password: '',
+      },
+    }
+  },
+}
+</script>
 
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
-  }
-
-  .box-card {
-    width: 480px;
-  }
-</style>
+<style lang="sass" scoped></style>
