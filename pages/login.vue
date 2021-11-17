@@ -15,15 +15,15 @@
     class="demo-dynamic"
   >
   <span class="demo-input-label">Email</span>
-   <el-input v-model="input" placeholder="Please input email"  />
+   <el-input v-model="dynamicValidateForm.email" placeholder="Please input email"  />
 
   <span class="demo-input-label">Password</span>
    <el-input v-model="input" placeholder="Please input password" show-password />
 
-<!-- 
+ 
   <el-form-item
       prop="email"
-      label="Email" 
+      label="Email"
       :rules="[
         {
           required: true,
@@ -37,7 +37,7 @@
         },
       ]"
     >
-     </el-form-item> -->
+     </el-form-item> 
     </el-form>
  
 </el-card>
@@ -55,6 +55,7 @@ export default {
             value: '',
           },
         ],
+        password: '',
         email: '',
       },
     }
@@ -73,18 +74,7 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields()
     },
-    removeDomain(item) {
-      const index = this.dynamicValidateForm.domains.indexOf(item)
-      if (index !== -1) {
-        this.dynamicValidateForm.domains.splice(index, 1)
-      }
-    },
-    addDomain() {
-      this.dynamicValidateForm.domains.push({
-        key: Date.now(),
-        value: '',
-      })
-    },
+
   },
 }
 </script>
