@@ -7,7 +7,7 @@ declare module "vue/types/options" {
     Props=DefaultProps> {
     head?: object | Function,
     layout?: string | Function,
-    middleware?: string | string[],
+    middleware?: string | string[] | object,
     scrollToTop?: boolean,
     transition?: String | object | Function,
     watchQuery?: boolean | string[]

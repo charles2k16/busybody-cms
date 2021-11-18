@@ -38,7 +38,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    async userLogin() {
+    async userLogin(): Promise<any> {
       try {
         const response = await this.$auth.loginWith('local', {
           data: this.loginForm,
