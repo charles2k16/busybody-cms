@@ -52,7 +52,7 @@
           </el-menu-item-group>
           <el-submenu index="3-4">
             <template slot="title">Option 4</template>
-            <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
+            <el-menu-item index="3-4-1">Logout</el-menu-item>
           </el-submenu>
         </el-submenu>
       </el-menu>
@@ -65,7 +65,7 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>View</el-dropdown-item>
             <el-dropdown-item>Add</el-dropdown-item>
-            <el-dropdown-item>Delete</el-dropdown-item>
+            <el-dropdown-item>Logout</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <span>{{ $auth.user.first_name }} </span>

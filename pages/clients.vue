@@ -6,7 +6,18 @@
 </template>
 
 <script>
+// import classesApi from '../api/classes'
+
 export default {
   name: 'Clients',
+  data() {
+    return {
+      posts: [],
+    }
+  },
+  async fetch() {
+    const ip = await this.$userApi.index()
+    console.log(ip.data)
+  },
 }
 </script>
