@@ -1,0 +1,36 @@
+html,
+body {
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  min-width: 950px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 19px;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+/* margin-top */
+.mt-0 {
+  margin-top: 5px;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mt-40 {
+  margin-top: 40px;
+}
+.ml-1 {
+  margin-left: 10px;
+}
+.mr-0 {
+  margin-right: 5px;
+}
