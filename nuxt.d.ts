@@ -13,3 +13,10 @@ declare module "vue/types/options" {
     watchQuery?: boolean | string[]
   }
 }
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $classApi: object,
+    $categoriesApi: object
+  }
+}

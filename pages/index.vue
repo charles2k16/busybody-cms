@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>Dashboard</h1>
-    <p class="pp">Dont do anything here</p>
   </div>
 </template>
 
@@ -9,8 +8,4 @@
 export default {}
 </script>
 
-<style lang="scss" scoped>
-.pp {
-  color: red;
-}
-</style>
+<style lang="scss" scoped></style>
