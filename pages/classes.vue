@@ -1,7 +1,12 @@
 <template>
   <div>
+    <ApplicationHandler ref="handleAction"></ApplicationHandler>
     <div class="d-flex_justify_center">
-      <el-input v-model="search" placeholder="Please input" class="input-width">
+      <el-input
+        v-model="search"
+        placeholder="Please input"
+        class="search_input_width"
+      >
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-input>
 
@@ -11,14 +16,9 @@
     <div></div>
 
     <div class="mb-2 d-flex_justify-between mt-40">
-      <h2>Classes <i class="el-icon-circle-plus-outline"></i></h2>
+      <h3>Classes <i class="el-icon-circle-plus-outline"></i></h3>
 
-      <el-button
-        icon="el-icon-plus"
-        plain
-        size="mini"
-        @click="showAddClassModal = true"
-      >
+      <el-button icon="el-icon-plus" type="primary" @click="addClass">
         Add a Class
       </el-button>
     </div>
@@ -26,10 +26,18 @@
     <el-card class="mt-40">
       <el-table v-loading="tableLoading" :data="classesData" stripe>
         <el-table-column type="expand">
-          <template slot-scope="props">
-            <p>Description: {{ props.row.description }}</p>
-            <p>Type: {{ props.row.classType }}</p>
-            <p>Level: {{ props.row.level }}</p>
+          <template #default="props">
+            <p><b>Description:</b> {{ props.row.description }}</p>
+            <p class="mt-20">
+              <b>Facility: </b> <span>{{ props.row.facility.name }}</span>
+            </p>
+            <p class="mt-20">
+              <b>Type:</b>
+              <el-tag type="info" effect="plain" size="small">
+                {{ props.row.classType }}
+              </el-tag>
+            </p>
+            <p class="mt-20"><b>Level:</b> {{ props.row.level }}</p>
           </template>
         </el-table-column>
         <el-table-column prop="capacity" label="Capacity"> </el-table-column>
@@ -50,9 +58,31 @@
         </el-table-column>
         <el-table-column label="Schedule">
           <template slot-scope="props">
-            <el-button size="mini" @click="viewClassSchedule(props.row._id)"
+            <el-button
+              size="mini"
+              type="text"
+              @click="viewClassSchedule(props.row._id)"
               >View Schedule</el-button
             >
+          </template>
+        </el-table-column>
+
+        <el-table-column>
+          <template slot-scope="props">
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="Edit Class"
+              placement="top"
+            >
+              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            </el-tooltip>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              circle
+              @click="deleteClass(props.row._id)"
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -68,50 +98,43 @@
       >
       </el-pagination>
     </div>
-
-    <!-- add new enquiry dialog -->
-    <el-dialog
-      :visible.sync="showAddClassModal"
-      width="40%"
-      custom-class="mobile-modal"
-    >
-      <template slot="title">
-        <h2>Add Classes & Facilities</h2>
-        <p>All fields should be filled for accurate class filtering.</p>
-      </template>
-      <AddClasses />
-    </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+const ApplicationHandler = () => import('../handlers/ApplicationHandler.vue')
 
 export default Vue.extend({
   name: 'Classes',
+  components: {
+    ApplicationHandler,
+  },
   data() {
     return {
       search: '',
       classesData: [],
       tableLoading: true,
-      title: 'Classes (1)',
-      showAddClassesModal: false,
-      showAddClassModal: false,
     }
   },
   async fetch() {
     try {
       const classes = await this.$classApi.index()
       this.classesData = classes.data
-      console.log(this.classesData)
       this.tableLoading = false
     } catch (err) {
       console.log(err)
     }
   },
   methods: {
-    viewClassSchedule(classId: string) {
+    viewClassSchedule(classId: string): void {
       console.log(classId)
+    },
+    deleteClass(classId: String): void {
+      console.log(classId)
+    },
+    addClass(): void {
+      this.$refs.handleAction.showAddClassModal()
     },
   },
 })

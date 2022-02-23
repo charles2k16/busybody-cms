@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="classDetails" label-position="left" :model="classDetails">
+    <el-form ref="classDetails" :model="classDetails" label-position="top">
       <!-- <div class="d-flex_align_center">
         <span>Categories</span>
 
@@ -18,78 +18,227 @@
 
       </div> -->
 
-      <el-form-item label="Category" prop="category">
-        <el-select v-model="classDetails.category">
-          <el-option
-            v-for="(category, index) in classCategories"
-            :key="index"
-            :label="category.name"
-            :value="category.name"
-          ></el-option>
-        </el-select>
-      </el-form-item>
+      <el-tabs v-model="activeTab" class="mt-4 px-2" stretch type="border-card">
+        <el-tab-pane name="details">
+          <span slot="label"
+            ><i class="el-icon-document-copy mr-5"></i> Class Details</span
+          >
 
-      <el-form-item label="Class Name" prop="name">
-        <el-input
-          v-model="classDetails.name"
-          placeholder="Fitness Centre 320-321SM"
-        />
-      </el-form-item>
+          <el-row :gutter="10" class="mt-20">
+            <el-col :span="21">
+              <el-form-item prop="category">
+                <el-select
+                  v-model="classDetails.category"
+                  multiple
+                  placeholder="Select Category"
+                  class="full_width mr-30"
+                >
+                  <el-option
+                    v-for="(category, index) in classCategories"
+                    :key="index"
+                    :label="category.name"
+                    :value="category._id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="Add Category"
+                placement="top"
+              >
+                <el-button
+                  type="primary"
+                  icon="el-icon-plus"
+                  circle
+                  @click="addCategory"
+                ></el-button>
+              </el-tooltip>
+            </el-col>
+          </el-row>
 
-      <el-form-item label="Description" prop="description">
-        <el-input
-          v-model="classDetails.description"
-          type="textarea"
-          placeholder="Fitness Centre 320-321SM"
-        />
-      </el-form-item>
-
-      <el-row :gutter="10">
-        <el-col :span="10">
-          <el-form-item label="Capacity" prop="capacity">
-            <el-input v-model="classDetails.capacity" type="number" />
+          <el-form-item prop="name">
+            <el-input
+              v-model="classDetails.name"
+              placeholder="Class Name (320-321SM)"
+            />
           </el-form-item>
-        </el-col>
 
-        <el-col :span="14">
-          <el-form-item label="Level" prop="level">
-            <el-select v-model="classDetails.level">
-              <el-option label="all levels" value="all levels"></el-option>
-              <el-option label="beginer" value="beginer"></el-option>
-              <el-option label="advanced" value="advanced"></el-option>
-            </el-select>
+          <el-form-item prop="description">
+            <el-input
+              v-model="classDetails.description"
+              type="textarea"
+              rows="3"
+              placeholder="Class Description"
+            />
           </el-form-item>
-        </el-col>
-      </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="10">
+              <el-form-item prop="capacity" label="Capacity">
+                <el-input-number
+                  v-model="classDetails.capacity"
+                  controls-position="right"
+                  :min="1"
+                  :max="20"
+                />
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="14">
+              <el-form-item prop="level" label="Class Level">
+                <el-select v-model="classDetails.level" class="full_width">
+                  <el-option label="all levels" value="all levels"></el-option>
+                  <el-option label="beginer" value="beginer"></el-option>
+                  <el-option label="advanced" value="advanced"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="50">
+            <el-col :span="12">
+              <el-form-item label="Class Type" prop="classType">
+                <el-radio-group v-model="classDetails.classType">
+                  <el-radio-button label="Onsite">Onsite</el-radio-button>
+                  <el-radio-button label="Online">Online</el-radio-button>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="12">
+              <el-form-item label="Price / Eligibility" prop="singlePrice">
+                <el-radio-group v-model="classDetails.singlePrice">
+                  <el-radio-button :label="true">One time</el-radio-button>
+                  <el-radio-button :label="false">Recurring</el-radio-button>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="21">
+              <el-form-item prop="facility">
+                <el-select
+                  v-model="classDetails.facility"
+                  filterable
+                  placeholder="Select a Facility"
+                  class="full_width mr-30"
+                >
+                  <el-option
+                    v-for="(facility, index) in facilities"
+                    :key="index"
+                    :label="facility.name"
+                    :value="facility._id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="Add Facilities"
+                placement="top"
+              >
+                <el-button
+                  type="primary"
+                  icon="el-icon-plus"
+                  circle
+                  @click="addCategory"
+                ></el-button>
+              </el-tooltip>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="21">
+              <el-form-item prop="trainers">
+                <el-select
+                  v-model="classDetails.trainers"
+                  filterable
+                  placeholder="Select a Trainer"
+                  class="full_width mr-30"
+                >
+                  <el-option
+                    v-for="(trainer, index) in trainers"
+                    :key="index"
+                    :label="getFullName(trainer.first_name, trainer.last_name)"
+                    :value="trainer._id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="Add Trainers"
+                placement="top"
+              >
+                <el-button
+                  type="primary"
+                  icon="el-icon-plus"
+                  circle
+                  @click="addCategory"
+                ></el-button>
+              </el-tooltip>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+
+        <!-- Schedule Info -->
+
+        <!-- Budget Info -->
+        <el-tab-pane name="schedule">
+          <span slot="label"><i class="el-icon-timer"></i> Schedule Info</span>
+        </el-tab-pane>
+      </el-tabs>
     </el-form>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { ClassState } from '@/types'
+import { MixinState } from '@/types/mixinsTypes'
 
 export default Vue.extend({
   name: 'AddClasses',
-  data() {
+  data(): ClassState {
     return {
       classDetails: {
         name: '',
         description: '',
+        capacity: 0,
+        level: '',
+        classType: '',
+        singlePrice: false,
+        category: [],
+        facility: '',
+        trainers: [],
       },
       classCategories: [],
+      facilities: [],
+      trainers: [],
+      activeTab: 'details',
     }
   },
-  created() {
-    this.getCategories()
+  async fetch() {
+    const categories = await this.$categoriesApi.index()
+    const facilities = await this.$facilitiesApi.index()
+    const trainers = await this.$rolesApi.index()
+
+    this.classCategories = categories.data
+    this.facilities = facilities.data
+    this.trainers = trainers.data
   },
   methods: {
-    async getCategories(): Promise<any> {
-      try {
-        const categories = await this.$categoriesApi.index()
-        this.classCategories = categories.data
-      } catch (err) {
-        console.log(err)
-      }
+    addCategory() {
+      const namew = (this as any as MixinState).getFullName('ghsyes', 'errdd')
+      console.log(namew)
     },
   },
 })

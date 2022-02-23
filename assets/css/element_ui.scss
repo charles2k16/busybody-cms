@@ -1,0 +1,34 @@
+// This css file is used to overwrite the default styles for all 
+// element UI components. 
+
+// All element ui classes starts with a 'el' word. Take note
+
+$--color-primary: #4c0a72;
+$--color-success: #13ce66;
+$--color-warning: #f7ba2a;
+$--color-danger: #f73030;
+$--color-info: rgb(159, 116, 245);
+
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import '~element-ui/packages/theme-chalk/src/index';
+
+.el-input {
+  font-size: 16px;
+}
+.el-input__inner {
+  height: 49px;
+  line-height: 50px;
+}
+.el-input-number {
+
+  line-height: 40px;
+
+  // .el-input__inner {
+  //  height: 42px;
+  // }
+}
+
+.el-form--label-top .el-form-item__label {
+  padding: 0 0 0 0 !important;
+}

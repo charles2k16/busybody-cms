@@ -1,3 +1,11 @@
+/* :root {
+  --el-color-primary: #5e24d5 !important;
+  --color-success: #13ce66 !important;
+  --color-warning: #f7ba2a !important;
+  --color-danger: #ff4949 !important;
+  --color-info: rgb(159, 116, 245) !important;
+} */
+
 html,
 body {
   min-height: 100%;
@@ -15,6 +23,9 @@ body {
 a {
   text-decoration: none;
 }
+i {
+  font-weight: bold;
+}
 
 /* margin-top */
 .mt-5 {
@@ -25,6 +36,9 @@ a {
 }
 .mt-20 {
   margin-top: 20px;
+}
+.mt-30 {
+  margin-top: 30px;
 }
 .mt-40 {
   margin-top: 40px;
@@ -41,6 +55,9 @@ a {
 }
 .mr-20 {
   margin-right: 20px;
+}
+.mr-30 {
+  margin-right: 30px;
 }
 
 /* padding bottom */
@@ -76,13 +93,16 @@ a {
   align-items: center;
 }
 
-.input-width {
-  width: 50%;
+.full_width {
+  width: 100%;
+}
+.search_input_width.el-input {
+  width: 50% !important;
 }
 .category_circles {
   height: 25px;
   width: 25px;
-  background-color: #bbb;
+  background-color: rgb(15, 13, 13);
   border-radius: 50%;
   display: inline-block;
 }

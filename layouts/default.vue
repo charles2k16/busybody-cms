@@ -16,7 +16,7 @@
 
 <script>
 import Vue from 'vue'
-import global from '~/mixins/global.js'
+import global from '~/mixins/global.ts'
 
 Vue.mixin(global)
 export default {}
