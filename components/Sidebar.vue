@@ -3,35 +3,61 @@
     <el-aside>
       <div>
         <img
-          src="https://via.placeholder.com/300x200?text=Company+Logo"
-          alt=""
+          src="https://via.placeholder.com/300x150?text=Company+Logo"
+          alt="logo"
         />
+
+        <el-menu :default-openeds="['1']" router>
+          <el-menu-item index="1" :route="{ path: '/' }">
+            <i class="el-icon-s-data"></i>
+            Dasboard</el-menu-item
+          >
+          <el-menu-item index="2" :route="{ path: '/schedules' }">
+            <i class="el-icon-date"></i>
+            Calendar</el-menu-item
+          >
+
+          <!-- <el-menu-item index="3">Memberships</el-menu-item> -->
+          <el-menu-item index="3">
+            <i class="el-icon-document-copy"></i>
+            Report</el-menu-item
+          >
+
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-menu"></i>
+              Manage</template
+            >
+            <el-menu-item-group>
+              <el-menu-item index="4-1" :route="{ path: '/classes' }"
+                >Classes</el-menu-item
+              >
+              <el-menu-item index="4-2" :route="{ path: '/trainers' }"
+                >Trainers</el-menu-item
+              >
+              <el-menu-item index="4-3" :route="{ path: '/clients' }"
+                >Clients</el-menu-item
+              >
+              <el-menu-item index="4-4" :route="{ path: '/clients' }"
+                >Facilities</el-menu-item
+              >
+            </el-menu-item-group>
+          </el-submenu>
+        </el-menu>
       </div>
-      <el-menu :default-openeds="['1']" router>
-        <el-menu-item index="1" :route="{ path: '/' }">Dasboard</el-menu-item>
-        <el-menu-item index="2" :route="{ path: '/schedules' }"
-          >Calendar</el-menu-item
-        >
 
-        <el-menu-item index="3">Report</el-menu-item>
-
-        <el-submenu index="2">
-          <template slot="title">Manage</template>
-          <el-menu-item-group>
-            <el-menu-item index="2-1" :route="{ path: '/classes' }"
-              >Classes</el-menu-item
-            >
-            <el-menu-item index="2-2" :route="{ path: '/trainers' }"
-              >Trainers</el-menu-item
-            >
-            <el-menu-item index="2-3" :route="{ path: '/clients' }"
-              >Clients</el-menu-item
-            >
-          </el-menu-item-group>
-        </el-submenu>
-
-        <el-menu-item index="3">Facilities</el-menu-item>
-      </el-menu>
+      <div>
+        <el-menu router>
+          <el-menu-item index="5" :route="{ path: '/' }">
+            <i class="el-icon-setting"></i>
+            Settings</el-menu-item
+          >
+          <el-menu-item index="5" :route="{ path: '/schedules' }">
+            <i class="el-icon-help"></i>
+            Help</el-menu-item
+          >
+        </el-menu>
+      </div>
     </el-aside>
   </div>
 </template>
@@ -44,9 +70,12 @@ export default {
 
 <style lang="scss" scoped>
 .el-aside {
-  width: 300px;
+  width: 250px !important;
   height: 100vh;
-  background-color: rgb(234, 236, 240);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
 }
 
 .el-menu {

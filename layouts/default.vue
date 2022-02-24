@@ -3,9 +3,9 @@
     <Sidebar />
 
     <el-container>
-      <!-- <el-header style="text-align: right; font-size: 12px">
+      <el-header>
         <Header />
-      </el-header> -->
+      </el-header>
 
       <el-main>
         <Nuxt />

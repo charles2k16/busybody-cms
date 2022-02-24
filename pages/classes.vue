@@ -1,27 +1,25 @@
 <template>
   <div>
     <ApplicationHandler ref="handleAction"></ApplicationHandler>
-    <div class="d-flex_justify_center">
-      <el-input
-        v-model="search"
-        placeholder="Please input"
-        class="search_input_width"
-      >
-        <el-button slot="append" icon="el-icon-search"></el-button>
-      </el-input>
 
-      <span> <i class="el-icon-sort"></i></span>
-    </div>
+    <el-row :gutter="10" class="mb-2 mt-40">
+      <el-col :sm="21" :md="21">
+        <div class="d-flex">
+          <el-input
+            v-model="search"
+            placeholder="Search Classes"
+            class="search_input_width"
+          >
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+            <el-button slot="append" icon="el-icon-sort"></el-button>
+          </el-input>
+        </div>
+      </el-col>
 
-    <div></div>
-
-    <div class="mb-2 d-flex_justify-between mt-40">
-      <h3>Classes <i class="el-icon-circle-plus-outline"></i></h3>
-
-      <el-button icon="el-icon-plus" type="primary" @click="addClass">
-        Add a Class
-      </el-button>
-    </div>
+      <el-col :sm="3" :md="3">
+        <el-button icon="el-icon-plus" type="primary"> Add a Class </el-button>
+      </el-col>
+    </el-row>
 
     <el-card class="mt-40">
       <el-table v-loading="tableLoading" :data="classesData" stripe>
@@ -33,15 +31,15 @@
             </p>
             <p class="mt-20">
               <b>Type:</b>
-              <el-tag type="info" effect="plain" size="small">
-                {{ props.row.classType }}
+              <el-tag type="info" size="small">
+                <b> {{ props.row.classType }}</b>
               </el-tag>
             </p>
             <p class="mt-20"><b>Level:</b> {{ props.row.level }}</p>
           </template>
         </el-table-column>
         <el-table-column prop="capacity" label="Capacity"> </el-table-column>
-        <el-table-column prop="name" label="Name"> </el-table-column>
+        <el-table-column prop="name" label="Name" />
         <el-table-column prop="trainers" label="Trainers">
           <template slot-scope="props">
             <el-tag v-for="trainer in props.row.trainers" :key="trainer.id">
@@ -112,9 +110,9 @@ export default Vue.extend({
   },
   data() {
     return {
-      search: '',
-      classesData: [],
-      tableLoading: true,
+      search: '' as string,
+      classesData: [] as Array<object>,
+      tableLoading: true as boolean,
     }
   },
   async fetch() {
@@ -133,9 +131,9 @@ export default Vue.extend({
     deleteClass(classId: String): void {
       console.log(classId)
     },
-    addClass(): void {
-      this.$refs.handleAction.showAddClassModal()
-    },
+    // addClass(): void {
+    //   this.$refs.handleAction.showAddClassModal()
+    // },
   },
 })
 </script>

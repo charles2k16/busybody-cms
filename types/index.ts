@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 declare interface classDetail {
   name: string
   description: string
@@ -9,10 +10,25 @@ declare interface classDetail {
   facility: string
   trainers: Array<string>
 }
-export interface ClassState {
+export interface IClassState {
   classDetails: classDetail
   classCategories: Array<object>
   facilities: Array<object>
   trainers: Array<object>
-  activeTab: String
+  activeTab: string
+}
+
+export interface ITrainer {
+  _id: string
+  name: string
+  first_name: string
+  last_name:string
+  email: string,
+  profile_pic: string,
+  has_relative: boolean,
+  role: string,
+  type: string,
+  classes: Array<object>
+  classNumber: number
+  lastActive: string
 }

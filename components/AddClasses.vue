@@ -118,7 +118,7 @@
             </el-col>
           </el-row>
 
-          <el-row :gutter="10">
+          <el-row :gutter="10" class="mt-20">
             <el-col :span="21">
               <el-form-item prop="facility">
                 <el-select
@@ -153,7 +153,7 @@
             </el-col>
           </el-row>
 
-          <el-row :gutter="10">
+          <el-row :gutter="10" class="mt-20">
             <el-col :span="21">
               <el-form-item prop="trainers">
                 <el-select
@@ -187,6 +187,11 @@
               </el-tooltip>
             </el-col>
           </el-row>
+
+          <!-- class images -->
+          <el-row :gutter="10" class="mt-20">
+            <el-col :span="24"> </el-col>
+          </el-row>
         </el-tab-pane>
 
         <!-- Schedule Info -->
@@ -202,12 +207,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ClassState } from '@/types'
-import { MixinState } from '@/types/mixinsTypes'
+import { IClassState } from '@/types'
+import { IMixinState } from '@/types/mixinsTypes'
 
 export default Vue.extend({
   name: 'AddClasses',
-  data(): ClassState {
+  data(): IClassState {
     return {
       classDetails: {
         name: '',
@@ -237,7 +242,7 @@ export default Vue.extend({
   },
   methods: {
     addCategory() {
-      const namew = (this as any as MixinState).getFullName('ghsyes', 'errdd')
+      const namew = (this as any as IMixinState).getFullName('ghss', 'errdd')
       console.log(namew)
     },
   },

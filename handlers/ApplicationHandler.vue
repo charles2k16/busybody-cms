@@ -8,9 +8,11 @@
     >
       <template slot="title">
         <h2>{{ modalTitle }}</h2>
-        <p>All fields should be filled for accurate class filtering.</p>
+        <p class="mt-10">
+          All fields should be filled for accurate class filtering.
+        </p>
       </template>
-      <AddClasses />
+      <AddClasses v-if="showClassModal" />
     </el-dialog>
   </div>
 </template>
