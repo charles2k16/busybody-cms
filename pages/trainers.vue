@@ -87,25 +87,28 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ITrainer } from '@/types'
+import { IUser } from '@/types'
 import { IMixinState } from '@/types/mixinsTypes'
-const ApplicationHandler = () => import('../handlers/ApplicationHandler.vue')
 
 export default Vue.extend({
   name: 'Trainers',
-  components: {
-    ApplicationHandler,
-  },
   data() {
     return {
       search: '' as string,
       trainersData: [] as Array<object>,
       tableLoading: true as boolean,
+      queryParams: {
+        page: 1 as number,
+        limit: 20 as number,
+      },
     }
   },
   async fetch() {
     try {
-      const trainers = await this.$rolesApi.index()
+      const trainers = await this.$rolesApi.userTypes(
+        'trainers',
+        this.queryParams
+      )
       this.loadDataTable(trainers.data)
     } catch (err) {
       console.log(err)
@@ -115,7 +118,7 @@ export default Vue.extend({
     deleteTrainer(trainerId: String): void {
       console.log(trainerId)
     },
-    loadDataTable(trainers: Array<ITrainer>) {
+    loadDataTable(trainers: Array<IUser>) {
       const self = this
       // i used bbClass to represent a single class object. because javascript uses the keyword class
 

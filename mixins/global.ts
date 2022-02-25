@@ -1,7 +1,11 @@
 import Vue from "vue";
 import { IMixinState } from '@/types/mixinsTypes'
+const ApplicationHandler = () => import('../handlers/ApplicationHandler.vue')
 
 export default Vue.extend({
+    components: {
+    ApplicationHandler,
+  },
   methods: <IMixinState> {
     getFullName (firstName : string, lastName: string): string  {
       return `${firstName} ${lastName}`;

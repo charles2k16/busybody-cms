@@ -12,7 +12,7 @@
             <i class="el-icon-s-data"></i>
             Dasboard</el-menu-item
           >
-          <el-menu-item index="2" :route="{ path: '/schedules' }">
+          <el-menu-item index="2" :route="{ path: '/calendar' }">
             <i class="el-icon-date"></i>
             Calendar</el-menu-item
           >
@@ -32,14 +32,14 @@
               <el-menu-item index="4-1" :route="{ path: '/classes' }"
                 >Classes</el-menu-item
               >
-              <el-menu-item index="4-2" :route="{ path: '/trainers' }"
+              <el-menu-item index="4-2" :route="{ path: '/facilities' }"
+                >Facilities</el-menu-item
+              >
+              <el-menu-item index="4-3" :route="{ path: '/trainers' }"
                 >Trainers</el-menu-item
               >
-              <el-menu-item index="4-3" :route="{ path: '/clients' }"
-                >Clients</el-menu-item
-              >
               <el-menu-item index="4-4" :route="{ path: '/clients' }"
-                >Facilities</el-menu-item
+                >Clients</el-menu-item
               >
             </el-menu-item-group>
           </el-submenu>

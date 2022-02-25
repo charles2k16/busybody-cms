@@ -3,7 +3,7 @@
     <h2 class="page__title">{{ pageTitle }}</h2>
     <div class="d-flex">
       <!-- <i class="el-icon-s-custom mr-10"></i> -->
-      <el-dropdown>
+      <el-dropdown trigger="click">
         <span class="dashboard-header__user">
           <el-avatar
             size="large"
@@ -21,9 +21,19 @@
         </span>
 
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>View</el-dropdown-item>
-          <el-dropdown-item>Add</el-dropdown-item>
-          <el-dropdown-item>Logout</el-dropdown-item>
+          <div class="dashboard-dropdown">
+            <ul>
+              <li>
+                <i class="el-icon-user"></i>
+                <span> Account </span>
+              </li>
+
+              <li>
+                <i class="el-icon-setting"></i>
+                <span> Logout </span>
+              </li>
+            </ul>
+          </div>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -78,6 +88,27 @@ export default Vue.extend({
       font-size: 1.2rem;
       margin-left: 10px;
       color: var(--text-base);
+    }
+  }
+}
+
+.dashboard-dropdown {
+  width: 200px;
+
+  ul {
+    list-style: none;
+
+    i {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    li {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      // background: rgb(245, 242, 242);
+      padding: 10px 15px;
     }
   }
 }

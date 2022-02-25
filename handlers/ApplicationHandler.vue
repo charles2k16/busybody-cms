@@ -24,12 +24,12 @@ export default Vue.extend({
   name: 'ApplicationHandler',
   data() {
     return {
-      modalTitle: '',
-      showClassModal: false,
+      modalTitle: '' as string,
+      showClassModal: false as boolean,
     }
   },
   methods: {
-    showAddClassModal() {
+    showAddClassModal(): void {
       this.modalTitle = 'Add Classes'
       this.showClassModal = true
     },

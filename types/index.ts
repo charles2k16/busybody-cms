@@ -18,7 +18,7 @@ export interface IClassState {
   activeTab: string
 }
 
-export interface ITrainer {
+export interface IUser {
   _id: string
   name: string
   first_name: string

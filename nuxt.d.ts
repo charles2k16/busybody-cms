@@ -14,17 +14,19 @@ declare module "vue/types/options" {
     }
 }
 
-interface apis {
+interface apiService {
   index: Function
+  userTypes: (path: string, params: object) => Promise<any>
   //  (query: object): Promise<any>
 }
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $classApi: apis,
-    $categoriesApi: apis
-    $facilitiesApi: apis
-    $rolesApi: apis
+    $classApi: apiService,
+    $categoriesApi: apiService
+    $facilitiesApi: apiService
+    $rolesApi: apiService
+    $userApi: apiService
     // $refs: { [key: string]: Vue | Element | (Vue | Element)[] | Function | undefined; }
   }
 }

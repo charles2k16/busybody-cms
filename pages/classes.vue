@@ -17,7 +17,9 @@
       </el-col>
 
       <el-col :sm="3" :md="3">
-        <el-button icon="el-icon-plus" type="primary"> Add a Class </el-button>
+        <el-button icon="el-icon-plus" type="primary" @click="addClass">
+          Add a Class
+        </el-button>
       </el-col>
     </el-row>
 
@@ -101,13 +103,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-const ApplicationHandler = () => import('../handlers/ApplicationHandler.vue')
 
 export default Vue.extend({
   name: 'Classes',
-  components: {
-    ApplicationHandler,
-  },
+
   data() {
     return {
       search: '' as string,
@@ -131,9 +130,9 @@ export default Vue.extend({
     deleteClass(classId: String): void {
       console.log(classId)
     },
-    // addClass(): void {
-    //   this.$refs.handleAction.showAddClassModal()
-    // },
+    addClass(): void {
+      ;(this as any).$refs.handleAction.showAddClassModal()
+    },
   },
 })
 </script>
