@@ -2,17 +2,81 @@
   <div>
     <ApplicationHandler ref="handleAction"></ApplicationHandler>
 
-    <el-row :gutter="10" class="mb-2 mt-40">
+    <el-row :gutter="10" class="mb-2 mt-20">
       <el-col :sm="21" :md="21">
         <div class="d-flex">
           <el-input
             v-model="search"
-            placeholder="Search Classes"
+            placeholder="Search classes by name"
             class="search_input_width"
           >
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
-            <el-button slot="append" icon="el-icon-sort"></el-button>
+            <el-button
+              slot="append"
+              icon="el-icon-arrow-down"
+              @click="showFilter = !showFilter"
+            ></el-button>
           </el-input>
+        </div>
+
+        <!-- filters -->
+        <div class="filter_div mt-40 ml-15">
+          <el-collapse-transition>
+            <div v-show="showFilter" class="d-flex_justify_between">
+              <div>
+                <div>
+                  <span class="mr-10">Location</span>
+                  <el-select
+                    v-model="queryParams.location"
+                    filterable
+                    placeholder="Filter by location"
+                    size="mini"
+                  >
+                    <el-option
+                      label="Causeway Bay"
+                      value="Causeway Bay"
+                    ></el-option>
+                  </el-select>
+                </div>
+
+                <div class="mt-20">
+                  <span class="mr-10">Capacity</span>
+                  <el-input-number
+                    v-model="queryParams.capacity"
+                    size="small"
+                    controls-position="right"
+                    :min="1"
+                    :max="20"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div>
+                  <span class="mr-10">Trainer</span>
+                  <el-select
+                    v-model="queryParams.trainer"
+                    filterable
+                    placeholder="Filter by trainer"
+                    size="mini"
+                  >
+                    <el-option label="Kai Tai" value="Kai Tai"></el-option>
+                  </el-select>
+                </div>
+
+                <div class="mt-20">
+                  <span class="mr-10">Promotion</span>
+                  <el-select
+                    v-model="queryParams.promotion"
+                    placeholder="Filter by trainer"
+                    size="mini"
+                  >
+                    <el-option label="20%" :value="20"></el-option>
+                  </el-select>
+                </div>
+              </div>
+            </div>
+          </el-collapse-transition>
         </div>
       </el-col>
 
@@ -24,7 +88,12 @@
     </el-row>
 
     <el-card class="mt-40">
-      <el-table v-loading="tableLoading" :data="classesData" stripe>
+      <el-table
+        v-loading="tableLoading"
+        :data="classesData"
+        stripe
+        :default-sort="{ prop: 'capacity', order: 'descending' }"
+      >
         <el-table-column type="expand">
           <template #default="props">
             <p><b>Description:</b> {{ props.row.description }}</p>
@@ -40,7 +109,8 @@
             <p class="mt-20"><b>Level:</b> {{ props.row.level }}</p>
           </template>
         </el-table-column>
-        <el-table-column prop="capacity" label="Capacity"> </el-table-column>
+        <el-table-column prop="capacity" label="Capacity" sortable>
+        </el-table-column>
         <el-table-column prop="name" label="Name" />
         <el-table-column prop="trainers" label="Trainers">
           <template slot-scope="props">
@@ -112,6 +182,13 @@ export default Vue.extend({
       search: '' as string,
       classesData: [] as Array<object>,
       tableLoading: true as boolean,
+      showFilter: false as boolean,
+      queryParams: {
+        location: '' as string,
+        trainer: '' as string,
+        capacity: Number,
+        promotion: 0 as number,
+      },
     }
   },
   async fetch() {
@@ -136,3 +213,9 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.filter_div {
+  width: 60%;
+}
+</style>

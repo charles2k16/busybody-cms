@@ -72,7 +72,6 @@ export default Vue.extend({
 
   .page__title {
     flex-basis: 100%;
-    font-size: 1.4rem;
     font-family: var(--font-primary-bold);
   }
 

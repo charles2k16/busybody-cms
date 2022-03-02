@@ -1,11 +1,261 @@
 <template>
   <div>
-    <h2>Calendar</h2>
+    <el-row :gutter="0">
+      <el-col :md="7">
+        <el-card class="calendar-card">
+          <div class="event__incoming">
+            <h3>Incoming Class Event</h3>
+            <div class="mt-20">
+              <div>
+                <i class="el-icon-alarm-clock"></i>
+                <span>12:30pm - 6:00pm</span>
+              </div>
+              <div class="mt-10">
+                <i class="el-icon-date"></i>
+                <span>20th April 2022</span>
+              </div>
+              <br />
+              <el-button type="primary" size="small" round class="full_width"
+                >View Event</el-button
+              >
+            </div>
+          </div>
+        </el-card>
+        <el-card class="calendar-card mt-20">
+          <h3><i class="el-icon-date"></i> {{ selectedDate }}</h3>
+          <div>
+            <el-calendar
+              v-model="selectedDate"
+              :first-day-of-week="7"
+              class="schedule_calendar"
+            >
+              <template slot="dateCell" slot-scope="{ date, data }">
+                <span @click="onDateChanged(date, data.isSelected)">
+                  {{ new Date(date).getDate() }}
+                </span>
+              </template>
+            </el-calendar>
+          </div>
+        </el-card>
+      </el-col>
+
+      <el-col :md="17">
+        <el-row :gutter="10">
+          <el-col :md="10">
+            <el-card>
+              <div class="d-flex_justify_between">
+                <h3>TOTAL EVENTS BOOKED</h3>
+                <span><i class="el-icon-circle-check"></i></span>
+              </div>
+              <div>
+                <h2>5</h2>
+              </div>
+
+              <!-- Booked events -->
+              <!--  Number of events for the month -->
+            </el-card>
+          </el-col>
+          <el-col :md="10">
+            <el-card>
+              <div class="d-flex_justify_between">
+                <h3>EVENTS FOR FEBRUARY</h3>
+                <span><i class="el-icon-circle-check"></i></span>
+              </div>
+              <div>
+                <h2>5</h2>
+              </div>
+
+              <!-- Booked events -->
+              <!--  Number of events for the month -->
+            </el-card>
+          </el-col>
+          <el-col :md="4">
+            <br />
+            <el-button icon="el-icon-plus" type="danger">
+              Add An Event
+            </el-button>
+          </el-col>
+        </el-row>
+
+        <div class="event_div mt-40">
+          <div class="event_div__head d-flex_justify_between">
+            <span>
+              <h3>Thursday</h3>
+            </span>
+
+            <span>
+              <h3>15 October, 2022</h3>
+            </span>
+
+            <span>
+              <i class="el-icon-back"></i>
+              <i class="el-icon-right"></i>
+            </span>
+          </div>
+
+          <div class="px-10 mt-20">
+            <el-card class="event_div__card">
+              <el-row type="flex" class="event_div__event">
+                <el-col :span="3">
+                  <div class="event_time d-flex_justify_center">
+                    <span>8:30 am</span>
+                  </div>
+                </el-col>
+
+                <el-col :span="21">
+                  <div class="event_div__info">
+                    <div class="d-flex_justify_between">
+                      <h3>SM Aerial Hoop - Intermediate</h3>
+                      <small>1h 30min</small>
+                    </div>
+                    <div class="d-flex mt-10">
+                      <i class="el-icon-office-building"></i>
+                      <h4>BusyBody Fitness Centre 630SM</h4>
+                    </div>
+
+                    <div class="d-flex mt-10">
+                      <i class="el-icon-user-solid"></i>
+                      <h4>Andre Tan</h4>
+                    </div>
+                  </div>
+                </el-col>
+              </el-row>
+              <el-row type="flex" class="event_div__event">
+                <el-col :span="3">
+                  <div class="event_time d-flex_justify_center">
+                    <span>8:30 am</span>
+                  </div>
+                </el-col>
+
+                <el-col :span="21">
+                  <div class="event_div__info">
+                    <div class="d-flex_justify_between">
+                      <h3>SM Aerial Hoop - Intermediate</h3>
+                      <small>1h 30min</small>
+                    </div>
+                    <div class="d-flex mt-10">
+                      <i class="el-icon-office-building"></i>
+                      <h4>BusyBody Fitness Centre 630SM</h4>
+                    </div>
+
+                    <div class="d-flex mt-10">
+                      <i class="el-icon-user-solid"></i>
+                      <h4>Andre Tan</h4>
+                    </div>
+                  </div>
+                </el-col>
+              </el-row>
+            </el-card>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
   name: 'Calendar',
-}
+  data() {
+    return {
+      selectedDate: '',
+    }
+  },
+  mounted() {
+    this.selectedDate = '09-February-2022'
+  },
+  methods: {
+    getcalendar() {
+      // fetch calendar with start date.
+      //  if calendar has a start date greater or equal to current date(todays date)
+      //  if start date is lesser than current date but end date is greater than cuurent date
+      //  if schedule has no end date and start date is less
+      // show the schedule days with thier class of these particular schedules.
+      //
+    },
+    onDateChanged(date: object, selected: boolean) {
+      console.log(date)
+      console.log(selected)
+      console.log(this.selectedDate)
+    },
+  },
+})
 </script>
+
+<style lang="scss" scoped>
+.calendar-card {
+  width: 365px;
+}
+.event__incoming {
+  border: 1px solid rgb(211, 209, 209);
+  border-radius: 10px;
+  max-width: 330px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 15px;
+
+  i {
+    color: rgb(192, 7, 7);
+    font-weight: bold;
+    font-size: 19px;
+  }
+}
+.event_div {
+  background: #eeeaf9;
+  height: 100vh;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  &__head {
+    background: var(--color-primary);
+    color: var(--text-white);
+    padding: 15px 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    span {
+      background-color: #703b8d;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+  }
+
+  &__event {
+    border-bottom: 1px solid #c7bfbf;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+
+    .event_time {
+      border-right: 1px solid #c7bfbf;
+      height: 137px;
+
+      span {
+        font-size: 23px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__info {
+    background: rgb(98, 70, 234);
+    background: linear-gradient(
+      172deg,
+      rgba(98, 70, 234, 1) 45%,
+      rgba(8, 84, 241, 1) 76%
+    );
+    margin: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+
+    i {
+      color: #d094f3;
+      margin-right: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+}
+</style>

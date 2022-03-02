@@ -25,14 +25,16 @@
             </el-form-item>
           </el-form>
 
-          <div class="d-flex_justify-between mt-30">
-            <el-checkbox v-model="checked">Remember Me</el-checkbox>
+          <div class="d-flex_justify_between mt-30">
+            <el-checkbox v-model="remember">Remember Me</el-checkbox>
 
             <span>Forget Password</span>
           </div>
 
           <div class="mt-40">
-            <el-button class="full_width" @click="userLogin">Login</el-button>
+            <el-button class="full_width" type="primary" @click="userLogin"
+              >Login</el-button
+            >
           </div>
         </div>
       </el-card>
@@ -49,9 +51,10 @@ export default Vue.extend({
   data() {
     return {
       loginForm: {
-        email: '',
-        password: '',
+        email: '' as string,
+        password: '' as string,
       },
+      remember: false as boolean,
     }
   },
   methods: {

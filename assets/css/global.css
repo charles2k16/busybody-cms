@@ -1,6 +1,7 @@
 :root {
   --text-base: #101011;
   --color-primary: #4c0a72;
+  --text-white: #ffffff;
   --font-primary: busybCircular_std;
   --font-primary-bold: busybCircular_bold;
   --font-primary-md: busybCircular_med;
@@ -53,12 +54,22 @@ b {
 small {
   font-size: 13px;
 }
+h2 {
+  font-size: 1.4rem;
+}
+h3 {
+  font-size: 1.1rem;
+}
+h4 {
+  font-size: 1rem;
+}
 .text-black {
   color: var(--text-base);
 }
 .text-primary {
   color: var(--color-primary);
 }
+
 /* margin-top */
 .mt-5 {
   margin-top: 5px;
@@ -101,6 +112,10 @@ small {
 /* padding bottom */
 .pb-10 {
   padding-bottom: 10px;
+}
+.px-10 {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .center {

@@ -26,7 +26,7 @@
     <el-card class="mt-40">
       <el-table v-loading="tableLoading" :data="facilitiesData" stripe>
         <el-table-column prop="name" label="Name" />
-        <el-table-column prop="description" label="Description" />
+        <el-table-column prop="description" label="Description" width="400" />
         <el-table-column label="Bookable" align="center">
           <template #default="props">
             <el-tag

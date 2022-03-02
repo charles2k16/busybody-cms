@@ -38,8 +38,24 @@
               <el-menu-item index="4-3" :route="{ path: '/trainers' }"
                 >Trainers</el-menu-item
               >
+
               <el-menu-item index="4-4" :route="{ path: '/clients' }"
                 >Clients</el-menu-item
+              >
+            </el-menu-item-group>
+          </el-submenu>
+
+          <el-submenu index="5">
+            <template slot="title">
+              <i class="el-icon-user-solid"></i>
+              Services</template
+            >
+            <el-menu-item-group>
+              <el-menu-item index="5-1" :route="{ path: '/clients' }"
+                >Memberships</el-menu-item
+              >
+              <el-menu-item index="5-2" :route="{ path: '/trainers' }"
+                >Promotions</el-menu-item
               >
             </el-menu-item-group>
           </el-submenu>
@@ -48,11 +64,11 @@
 
       <div>
         <el-menu router>
-          <el-menu-item index="5" :route="{ path: '/' }">
+          <el-menu-item index="6" :route="{ path: '/' }">
             <i class="el-icon-setting"></i>
             Settings</el-menu-item
           >
-          <el-menu-item index="5" :route="{ path: '/schedules' }">
+          <el-menu-item index="7" :route="{ path: '/schedules' }">
             <i class="el-icon-help"></i>
             Help</el-menu-item
           >

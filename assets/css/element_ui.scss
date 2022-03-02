@@ -74,7 +74,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
     border: 1px solid #9ca2b1;
   }
 }
-.el-input-number {
+.classes_input.el-input-number {
   line-height: 40px;
   // .el-input__inner {
   //  height: 42px;
@@ -119,3 +119,55 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 .el-table td.el-table__cell div {
   color: #39365c;
 }
+
+// date picker & callendar
+.el-calendar-table {
+
+  &__row {
+    .current.is-selected {
+      color: white;
+      background: var(--color-primary);
+      border-radius: 4px;
+    }
+  }
+  .el-calendar-day {
+    box-sizing: border-box;
+    padding: 8px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+
+    &:hover {
+      cursor: pointer;
+      background-color: none !important;
+      background: none;
+    }
+  }
+}
+.el-calendar__body {
+  padding: 12px 2px 6px;
+}
+.schedule_calendar .el-calendar__header {
+  padding: 17px 0px;
+
+  .el-calendar__title {
+    display: none;
+  }
+}
+
+// card
+.el-card {
+  border-radius: 6px;
+
+  &__body {
+    padding: 15px;
+  }
+}
+.event_div__card {
+  border: 1px solid #EBEEF5;
+  background-color: #EBEEF5;
+
+  .el-card__body {
+    padding: 0px !important;
+  }
+} 

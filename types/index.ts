@@ -16,6 +16,7 @@ export interface IClassState {
   facilities: Array<object>
   trainers: Array<object>
   activeTab: string
+  queryParams: object
 }
 
 export interface IUser {
