@@ -1,7 +1,7 @@
 <template>
   <div class="login_container">
     <div class="box-card">
-      <el-card>
+      <el-card class="py-20 px-10">
         <div slot="header" class="clearfix">
           <span class="login_title">BusyBody Fitness Center</span>
           <p class="mt-10">Login to manage Locations and Classes</p>
@@ -12,7 +12,7 @@
               <el-input
                 v-model="loginForm.email"
                 class="bb_input"
-                placeholder="Your email/username"
+                placeholder="Your email"
               ></el-input>
             </el-form-item>
 
@@ -44,6 +44,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
+// import { IErrorObject } from '@/types'
+import { IMixinState } from '@/types/mixinsTypes'
 
 export default Vue.extend({
   name: 'Login',
@@ -64,8 +66,11 @@ export default Vue.extend({
           data: this.loginForm,
         })
         console.log(response)
-      } catch (err) {
-        console.log(err)
+      } catch (error: any) {
+        const err = Object.assign({}, error)
+        const message = err.response.data.error
+
+        ;(this as any as IMixinState).getNotification(message, 'error')
       }
     },
   },

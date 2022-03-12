@@ -3,7 +3,7 @@ import { IMixinState } from '@/types/mixinsTypes'
 const ApplicationHandler = () => import('../handlers/ApplicationHandler.vue')
 
 export default Vue.extend({
-    components: {
+  components: {
     ApplicationHandler,
   },
   methods: <IMixinState> {
@@ -29,5 +29,12 @@ export default Vue.extend({
 
       return `${day}-${month}-${year}`;
     },
+    getNotification(message: string, type: string) {
+      this.$message({
+        showClose: true,
+        message,
+        type
+      });
+    }
   }
 });

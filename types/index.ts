@@ -33,3 +33,9 @@ export interface IUser {
   classNumber: number
   lastActive: string
 }
+
+export interface IErrorObject {
+  response: {
+    data: object
+  }
+}
