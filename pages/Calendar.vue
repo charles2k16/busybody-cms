@@ -22,7 +22,10 @@
           </div>
         </el-card>
         <el-card class="calendar-card mt-20">
-          <h3><i class="el-icon-date"></i> {{ selectedDate }}</h3>
+          <h3 class="selected_date d-flex_justify_between">
+            <i class="el-icon-date"></i>
+            {{ getFormatedDate(selectedDate, 'long') }}
+          </h3>
           <div>
             <el-calendar
               v-model="selectedDate"
@@ -40,40 +43,26 @@
       </el-col>
 
       <el-col :md="17">
-        <el-row :gutter="10">
+        <el-row :gutter="25">
           <el-col :md="10">
-            <el-card>
-              <div class="d-flex_justify_between">
-                <h3>TOTAL EVENTS BOOKED</h3>
-                <span><i class="el-icon-circle-check"></i></span>
-              </div>
-              <div>
-                <h2>5</h2>
-              </div>
-
-              <!-- Booked events -->
-              <!--  Number of events for the month -->
-            </el-card>
+            <DataCountCard
+              title="TOTAL EVENTS BOOKED"
+              icon="el-icon-document"
+              color="#7a31da"
+              :total-number="20"
+            />
           </el-col>
           <el-col :md="10">
-            <el-card>
-              <div class="d-flex_justify_between">
-                <h3>EVENTS FOR FEBRUARY</h3>
-                <span><i class="el-icon-circle-check"></i></span>
-              </div>
-              <div>
-                <h2>5</h2>
-              </div>
-
-              <!-- Booked events -->
-              <!--  Number of events for the month -->
-            </el-card>
+            <DataCountCard
+              title="EVENTS FOR THE MONTH"
+              icon="el-icon-document"
+              color="#7a31da"
+              :total-number="4"
+            />
           </el-col>
           <el-col :md="4">
             <br />
-            <el-button icon="el-icon-plus" type="danger">
-              Add An Event
-            </el-button>
+            <el-button icon="el-icon-plus" type="danger"> Add Event </el-button>
           </el-col>
         </el-row>
 
@@ -84,7 +73,7 @@
             </span>
 
             <span>
-              <h3>15 October, 2022</h3>
+              <h3>{{ getFormatedDate(selectedDate, 'long') }}</h3>
             </span>
 
             <span>
@@ -160,11 +149,11 @@ export default Vue.extend({
   name: 'Calendar',
   data() {
     return {
-      selectedDate: '',
+      selectedDate: '' as object | string,
     }
   },
   mounted() {
-    this.selectedDate = '09-February-2022'
+    this.selectedDate = new Date()
   },
   methods: {
     getcalendar() {
@@ -187,14 +176,23 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .calendar-card {
   width: 365px;
+
+  .selected_date {
+    i {
+      color: rgb(192, 7, 7);
+      font-weight: bold;
+      font-size: 29px;
+    }
+    font-size: 1.5rem;
+  }
 }
 .event__incoming {
-  border: 1px solid rgb(211, 209, 209);
-  border-radius: 10px;
+  // border: 1px solid rgb(211, 209, 209);
+  // border-radius: 10px;
   max-width: 330px;
   width: 100%;
   margin: 0 auto;
-  padding: 10px 15px;
+  padding: 10px 10px;
 
   i {
     color: rgb(192, 7, 7);

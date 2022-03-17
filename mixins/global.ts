@@ -10,13 +10,13 @@ export default Vue.extend({
     getFullName (firstName : string, lastName: string): string  {
       return `${firstName} ${lastName}`;
     },
-    getDate(currentDate: string): string {
+    getFormatedDate(currentDate: string, type: string): string {
       if (!currentDate) return 'None';
 
       const date = new Date(currentDate);
       const dateTimeFormat = new Intl.DateTimeFormat('en', {
         year: 'numeric',
-        month: 'short',
+        month: type === 'long' ? 'long' : 'short',
         day: '2-digit',
       });
       const [

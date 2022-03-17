@@ -27,8 +27,8 @@
                 <i class="el-icon-user"></i>
                 <span> Account </span>
               </li>
-
-              <li>
+              <hr class="hr_rule" />
+              <li class="mt-5">
                 <i class="el-icon-setting"></i>
                 <span> Logout </span>
               </li>
@@ -80,34 +80,37 @@ export default Vue.extend({
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 250px;
+    width: 280px;
 
     i {
       font-weight: bold;
       font-size: 1.2rem;
-      margin-left: 10px;
+      margin-left: 20px;
       color: var(--text-base);
     }
   }
 }
 
 .dashboard-dropdown {
-  width: 200px;
+  width: 230px;
 
   ul {
     list-style: none;
 
     i {
-      font-size: 18px;
-      margin-right: 10px;
+      font-size: 20px;
+      margin-right: 15px;
     }
 
     li {
       cursor: pointer;
       display: flex;
       align-items: center;
-      // background: rgb(245, 242, 242);
-      padding: 10px 15px;
+      padding: 20px 15px;
+
+      &:hover {
+        background: rgb(247, 247, 247);
+      }
     }
   }
 }

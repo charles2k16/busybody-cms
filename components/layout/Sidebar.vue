@@ -2,10 +2,9 @@
   <div>
     <el-aside>
       <div>
-        <img
-          src="https://via.placeholder.com/300x150?text=Company+Logo"
-          alt="logo"
-        />
+        <div class="sidebar_logo_div">
+          <img src="/logo.webp" alt="logo" width="180px" />
+        </div>
 
         <el-menu :default-openeds="['1']" router>
           <el-menu-item index="1" :route="{ path: '/' }">
@@ -91,7 +90,12 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #ffffff;
+  background-color: white;
+
+  .sidebar_logo_div {
+    padding: 8px 10px 10px 15px;
+    background-color: #fff;
+  }
 }
 
 .el-menu {

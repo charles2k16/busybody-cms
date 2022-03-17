@@ -62,10 +62,9 @@ export default Vue.extend({
   methods: {
     async userLogin(): Promise<any> {
       try {
-        const response = await this.$auth.loginWith('local', {
+        await this.$auth.loginWith('local', {
           data: this.loginForm,
         })
-        console.log(response)
       } catch (error: any) {
         const err = Object.assign({}, error)
         const message = err.response.data.error

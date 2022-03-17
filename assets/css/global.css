@@ -30,6 +30,8 @@ body {
   min-height: 100%;
   font-family: var(--font-primary), sans-serif;
   background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
 }
 * {
   margin: 0;
@@ -62,6 +64,9 @@ h3 {
 }
 h4 {
   font-size: 1rem;
+}
+hr.hr_rule {
+  border: 0.5px solid #eeeaf9;
 }
 .text-black {
   color: var(--text-base);
@@ -124,6 +129,9 @@ h4 {
 .pt-20 {
   padding-top: 20px;
 }
+.pt-10 {
+  padding-top: 10px;
+}
 
 .center {
   text-align: center;
@@ -163,10 +171,13 @@ h4 {
 .search_input_width.el-input {
   width: 80% !important;
 }
-.category_circles {
+/* .category_circles {
   height: 25px;
   width: 25px;
   background-color: rgb(15, 13, 13);
   border-radius: 50%;
   display: inline-block;
-}
+} */
+/* .cardBorderPrimary {
+  border-top: 8px solid #3353ac !important;
+} */

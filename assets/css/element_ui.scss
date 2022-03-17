@@ -13,7 +13,12 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 @import '~element-ui/packages/theme-chalk/src/index';
 // @import 'element-ui/lib/theme-chalk/reset.css';
 
+
+.el-container {
+  border: none !important
+}
 .el-header {
+  height: 72px !important;
   padding: 0 0px;
   box-sizing: border-box;
   line-height: 50px;
@@ -30,17 +35,22 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 }
 
 // menu items
-.el-menu-item {
-  display: flex;
-  align-items: center;
-  font-size: 17px;
-  font-weight: bold;
+.el-menu {
+  border-right: none;
 
-  i {
+  .el-menu-item {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
     font-weight: bold;
-    color: black;
+
+    i {
+      font-weight: bold;
+      color: black;
+    }
   }
 }
+
 .el-submenu__title {
   display: flex;
   align-items: center;
@@ -56,6 +66,9 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 // button
 .el-button {
   font-family: var(--font-primary) !important;
+}
+.el-button--mini {
+  padding: 5px 14px;
 }
 
 // form inputs
@@ -157,7 +170,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 // card
 .el-card {
-  border-radius: 6px;
+  border-radius: 13px;
 
   &__body {
     padding: 15px;

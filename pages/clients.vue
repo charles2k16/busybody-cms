@@ -114,8 +114,9 @@ export default Vue.extend({
 
       const tableData = clients.map(function (client) {
         client.name = client.first_name + ' ' + client.last_name
-        client.lastActive = (self as any as IMixinState).getDate(
-          client.lastActive
+        client.lastActive = (self as any as IMixinState).getFormatedDate(
+          client.lastActive,
+          'short'
         )
         client.classNumber = client.classes.length
         return client
