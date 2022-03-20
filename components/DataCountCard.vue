@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-card :class="boardClass" :style="`border-top: 8px solid ${color};`">
+    <!-- :style="`border-top: 8px solid ${color};`" -->
+    <el-card>
       <div class="d-flex_justify_between">
         <span
           ><h3>{{ title }}</h3></span
@@ -34,7 +35,7 @@ export default Vue.extend({
     },
     color: {
       type: String,
-      default: 'primary',
+      default: '#4c0a72',
     },
     totalNumber: {
       type: Number,

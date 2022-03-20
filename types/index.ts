@@ -9,6 +9,7 @@ declare interface classDetail {
   category: Array<string>
   facility: string
   trainers: Array<string>
+  images: Array<string>
 }
 export interface IClassState {
   classDetails: classDetail
@@ -23,7 +24,7 @@ export interface IUser {
   _id: string
   name: string
   first_name: string
-  last_name:string
+  last_name: string
   email: string,
   profile_pic: string,
   has_relative: boolean,

@@ -124,8 +124,9 @@ export default Vue.extend({
 
       const tableData = trainers.map(function (trainer) {
         trainer.name = trainer.first_name + ' ' + trainer.last_name
-        trainer.lastActive = (self as any as IMixinState).getDate(
-          trainer.lastActive
+        trainer.lastActive = (self as any as IMixinState).getFormatedDate(
+          trainer.lastActive,
+          'short'
         )
         trainer.classNumber = trainer.classes.length
         return trainer

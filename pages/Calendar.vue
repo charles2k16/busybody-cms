@@ -46,23 +46,21 @@
         <el-row :gutter="25">
           <el-col :md="10">
             <DataCountCard
-              title="TOTAL EVENTS BOOKED"
+              title="Total Events Booked"
               icon="el-icon-document"
-              color="#7a31da"
               :total-number="20"
             />
           </el-col>
           <el-col :md="10">
             <DataCountCard
-              title="EVENTS FOR THE MONTH"
+              title="Events for the month"
               icon="el-icon-document"
-              color="#7a31da"
               :total-number="4"
             />
           </el-col>
           <el-col :md="4">
-            <br />
-            <el-button icon="el-icon-plus" type="danger"> Add Event </el-button>
+            <!-- <br />
+            <el-button icon="el-icon-plus" type="danger"> Add Event </el-button> -->
           </el-col>
         </el-row>
 
@@ -237,11 +235,11 @@ export default Vue.extend({
   }
 
   &__info {
-    background: rgb(98, 70, 234);
+    background: rgb(92, 46, 186);
     background: linear-gradient(
       172deg,
-      rgba(98, 70, 234, 1) 45%,
-      rgba(8, 84, 241, 1) 76%
+      rgba(92, 46, 186, 0.929030987394958) 33%,
+      rgba(70, 46, 145, 0.9318321078431373) 79%
     );
     margin: 15px;
     padding: 15px;

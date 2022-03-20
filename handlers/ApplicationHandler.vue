@@ -3,11 +3,11 @@
     <!-- add new enquiry dialog -->
     <el-dialog
       :visible.sync="showClassModal"
-      width="42%"
+      width="35%"
       custom-class="mobile-modal"
     >
       <template slot="title">
-        <h2>{{ modalTitle }}</h2>
+        <h3>{{ modalTitle }}</h3>
         <p class="mt-10">
           All fields should be filled for accurate class filtering.
         </p>

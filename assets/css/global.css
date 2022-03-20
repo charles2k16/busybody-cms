@@ -1,6 +1,6 @@
 :root {
   --text-base: #101011;
-  --color-primary: #4c0a72;
+  --color-primary: #440a66;
   --text-white: #ffffff;
   --font-primary: busybCircular_std;
   --font-primary-bold: busybCircular_bold;
@@ -68,6 +68,13 @@ h4 {
 hr.hr_rule {
   border: 0.5px solid #eeeaf9;
 }
+footer {
+  padding: 7px;
+  background: rgb(246, 240, 248);
+}
+footer p {
+  font-size: 11px;
+}
 .text-black {
   color: var(--text-base);
 }
@@ -90,6 +97,14 @@ hr.hr_rule {
 }
 .mt-40 {
   margin-top: 40px;
+}
+
+/* margin-bottom */
+.mb-5 {
+  margin-bottom: 5px;
+}
+.mb-10 {
+  margin-bottom: 10px;
 }
 
 /* margin-left */

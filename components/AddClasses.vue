@@ -3,7 +3,6 @@
     <el-form ref="classDetails" :model="classDetails" label-position="top">
       <!-- <div class="d-flex_align_center">
         <span>Categories</span>
-
         <div class="d-flex_justify-between">
           <div
             v-for="(category, index) in classCategories"
@@ -14,8 +13,6 @@
             <span class="d-block">{{ category.name }}</span>
           </div>
         </div>
-
-
       </div> -->
 
       <el-tabs v-model="activeTab" class="mt-4 px-2" stretch type="border-card">
@@ -75,7 +72,7 @@
           </el-row>
 
           <el-row :gutter="10" class="mt-20">
-            <el-col :span="22">
+            <el-col :md="22" :xs="24" :sm="24">
               <el-form-item prop="facility">
                 <el-select
                   v-model="classDetails.facility"
@@ -92,7 +89,7 @@
                 </el-select>
               </el-form-item>
             </el-col>
-            <el-col :span="2">
+            <el-col :md="2" :xs="24" :sm="24">
               <el-tooltip
                 class="item"
                 effect="dark"
@@ -110,7 +107,7 @@
           </el-row>
 
           <el-row :gutter="10" class="mt-20">
-            <el-col :span="22">
+            <el-col :md="22" :xs="24" :sm="24">
               <el-form-item prop="trainers">
                 <el-select
                   v-model="classDetails.trainers"
@@ -127,7 +124,7 @@
                 </el-select>
               </el-form-item>
             </el-col>
-            <el-col :span="2">
+            <el-col :md="2" :xs="24" :sm="24">
               <el-tooltip
                 class="item"
                 effect="dark"
@@ -145,7 +142,7 @@
           </el-row>
 
           <el-row :gutter="10">
-            <el-col :span="10">
+            <el-col :md="10" :xs="24" :sm="24">
               <el-form-item prop="capacity" label="Capacity">
                 <el-input-number
                   v-model="classDetails.capacity"
@@ -157,19 +154,19 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="14">
+            <el-col :md="14" :xs="24" :sm="24">
               <el-form-item prop="level" label="Class Level">
                 <el-select v-model="classDetails.level" class="full_width">
-                  <el-option label="all levels" value="all levels"></el-option>
-                  <el-option label="beginer" value="beginer"></el-option>
-                  <el-option label="advanced" value="advanced"></el-option>
+                  <el-option label="All levels" value="all levels"></el-option>
+                  <el-option label="Beginer" value="beginer"></el-option>
+                  <el-option label="Advanced" value="advanced"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
           </el-row>
 
-          <el-row :gutter="50">
-            <el-col :span="12">
+          <el-row :gutter="30">
+            <el-col :md="12" :xs="24" :sm="24">
               <el-form-item label="Class Type" prop="classType">
                 <el-radio-group v-model="classDetails.classType">
                   <el-radio-button label="Onsite">Onsite</el-radio-button>
@@ -178,7 +175,7 @@
               </el-form-item>
             </el-col>
 
-            <el-col :span="12">
+            <el-col :md="12" :xs="24" :sm="24">
               <el-form-item label="Price / Eligibility" prop="singlePrice">
                 <el-radio-group v-model="classDetails.singlePrice">
                   <el-radio-button :label="true">One time</el-radio-button>
@@ -188,9 +185,14 @@
             </el-col>
           </el-row>
 
+          <!-- optional values -->
+
           <!-- class images -->
           <el-row :gutter="10" class="mt-20">
-            <el-col :span="24"> </el-col>
+            <el-col :md="24" :xs="24" :sm="24">
+              <label class="mb-10 d-block">Class Images</label>
+              <ImageUpload />
+            </el-col>
           </el-row>
         </el-tab-pane>
 
@@ -224,6 +226,7 @@ export default Vue.extend({
         category: [],
         facility: '',
         trainers: [],
+        images: [''],
       },
       classCategories: [],
       facilities: [],
