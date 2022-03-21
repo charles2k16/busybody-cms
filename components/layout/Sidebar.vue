@@ -53,7 +53,7 @@
             Services</template
           >
           <el-menu-item-group>
-            <el-menu-item index="5-1" :route="{ path: '/clients' }"
+            <el-menu-item index="5-1" :route="{ path: '/memberships' }"
               >Memberships</el-menu-item
             >
             <el-menu-item index="5-2" :route="{ path: '/trainers' }"
