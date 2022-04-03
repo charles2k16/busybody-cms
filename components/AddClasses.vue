@@ -185,8 +185,6 @@
             </el-col>
           </el-row>
 
-          <!-- optional values -->
-
           <!-- class images -->
           <el-row :gutter="10" class="mt-20">
             <el-col :md="24" :xs="24" :sm="24">
