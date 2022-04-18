@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- add new enquiry dialog -->
+    <!-- Add Class dialog -->
     <el-dialog
       :visible.sync="showClassModal"
       width="35%"
