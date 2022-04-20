@@ -11,6 +11,17 @@ declare interface classDetail {
   trainers: Array<string>
   images: Array<string>
 }
+
+// declare interface day {
+//   SUN: string
+//   MON: string
+//   TUES: string
+//   WED: string
+//   THURS: string
+//   FRI: string
+//   SAT: string
+// }
+
 export interface IClassState {
   classDetails: classDetail
   classCategories: Array<object>
@@ -25,11 +36,11 @@ export interface IUser {
   name: string
   first_name: string
   last_name: string
-  email: string,
-  profile_pic: string,
-  has_relative: boolean,
-  role: string,
-  type: string,
+  email: string
+  profile_pic: string
+  has_relative: boolean
+  role: string
+  type: string
   classes: Array<object>
   classNumber: number
   lastActive: string

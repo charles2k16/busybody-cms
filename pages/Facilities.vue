@@ -1,6 +1,15 @@
 <template>
   <div>
-    <ApplicationHandler ref="handleAction"></ApplicationHandler>
+    <AddFacilityModal
+      ref="handleAction"
+      @facility="addFacility"
+    ></AddFacilityModal>
+
+    <DeleteModal
+      ref="updateAction"
+      file="facility"
+      @confirmDelete="deleteFacility"
+    ></DeleteModal>
 
     <el-row :gutter="10" class="mb-2 mt-40">
       <el-col :sm="21" :md="21">
@@ -17,7 +26,11 @@
       </el-col>
 
       <el-col :sm="3" :md="3">
-        <el-button icon="el-icon-plus" type="primary">
+        <el-button
+          icon="el-icon-plus"
+          type="primary"
+          @click="showFacilityModal"
+        >
           Add a Facility
         </el-button>
       </el-col>
@@ -38,7 +51,7 @@
           </template>
         </el-table-column>
         <el-table-column align="right">
-          <template #default="">
+          <template #default="props">
             <el-tooltip
               class="item"
               effect="dark"
@@ -47,7 +60,12 @@
             >
               <el-button type="primary" icon="el-icon-edit" circle></el-button>
             </el-tooltip>
-            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              circle
+              @click="deleteFacilityModal(props.row._id)"
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -68,6 +86,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { facility } from '@/types/modals/addModals'
 
 export default Vue.extend({
   name: 'Clients',
@@ -76,17 +95,43 @@ export default Vue.extend({
       search: '' as string,
       facilitiesData: [] as Array<object>,
       tableLoading: true as boolean,
+      facilityId: '' as string,
     }
   },
   async fetch() {
     try {
       const facilities = await this.$facilitiesApi.index()
       this.facilitiesData = facilities.data
+      console.log(facilities)
       this.tableLoading = false
     } catch (err) {
       console.log(err)
     }
   },
-  methods: {},
+  methods: {
+    addFacility(event: facility): void {
+      this.$facilitiesApi
+        .create({
+          name: event.name,
+          description: event.description,
+        })
+        .then(() => {
+          this.$message('Facility Created Successfully!')
+          this.$fetch()
+        })
+      console.log('facility', event)
+    },
+    deleteFacilityModal(id: string) {
+      console.log(id)
+      this.facilityId = id
+      ;(this as any).$refs.updateAction.open()
+    },
+    deleteFacility() {
+      this.$facilitiesApi.delete(this.facilityId).then(() => this.$fetch())
+    },
+    showFacilityModal(): void {
+      ;(this as any).$refs.handleAction.showAddFacilityModal()
+    },
+  },
 })
 </script>
