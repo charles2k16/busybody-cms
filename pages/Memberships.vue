@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <ApplicationHandler ref="handleAction"></ApplicationHandler> -->
+    <AddMember ref="handleAction"></AddMember>
 
     <el-row :gutter="10" class="mb-2 mt-40">
       <el-col :sm="20" :md="20">
@@ -17,7 +17,7 @@
       </el-col>
 
       <el-col :sm="4" :md="4">
-        <el-button icon="el-icon-plus" type="primary"
+        <el-button icon="el-icon-plus" type="primary" @click="addMemberModal"
           >Add Membership
         </el-button>
       </el-col>
@@ -125,6 +125,9 @@ export default Vue.extend({
       })
       this.membershipsData = tableData
       this.tableLoading = false
+    },
+    addMemberModal(): void {
+      ;(this as any).$refs.handleAction.showAddMemberModal()
     },
   },
 })

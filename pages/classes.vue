@@ -1,6 +1,14 @@
 <template>
   <div>
-    <ApplicationHandler ref="handleAction"></ApplicationHandler>
+    <ApplicationHandler
+      ref="handleAction"
+      @newClass="addClass"
+    ></ApplicationHandler>
+    <DeleteModal
+      ref="updateAction"
+      file="class"
+      @confirmDelete="deleteClass"
+    ></DeleteModal>
 
     <el-row :gutter="10" class="mb-2 mt-20">
       <el-col :sm="21" :md="21">
@@ -81,7 +89,7 @@
       </el-col>
 
       <el-col :sm="3" :md="3">
-        <el-button icon="el-icon-plus" type="primary" @click="addClass">
+        <el-button icon="el-icon-plus" type="primary" @click="addClassModal">
           Add a Class
         </el-button>
       </el-col>
@@ -151,7 +159,7 @@
               type="danger"
               icon="el-icon-delete"
               circle
-              @click="deleteClass(props.row._id)"
+              @click="deleteClassModal(props.row._id)"
             ></el-button>
           </template>
         </el-table-column>
@@ -183,6 +191,7 @@ export default Vue.extend({
       classesData: [] as Array<object>,
       tableLoading: true as boolean,
       showFilter: false as boolean,
+      classId: '' as string,
       queryParams: {
         location: '' as string,
         trainer: '' as string,
@@ -195,6 +204,7 @@ export default Vue.extend({
     try {
       const classes = await this.$classApi.index()
       this.classesData = classes.data
+      console.log(classes)
       this.tableLoading = false
     } catch (err) {
       console.log(err)
@@ -204,11 +214,18 @@ export default Vue.extend({
     viewClassSchedule(classId: string): void {
       console.log(classId)
     },
-    deleteClass(classId: String): void {
-      console.log(classId)
+    deleteClassModal(classId: string): void {
+      this.classId = classId
+      ;(this as any).$refs.updateAction.open()
+    },
+    addClassModal(): void {
+      ;(this as any).$refs.handleAction.showAddClassModal()
     },
     addClass(): void {
-      ;(this as any).$refs.handleAction.showAddClassModal()
+      // this.$classApi.create(this.classId).then(() => this.$fetch)
+    },
+    deleteClass(): void {
+      this.$classApi.delete(this.classId).then(() => this.$fetch)
     },
   },
 })

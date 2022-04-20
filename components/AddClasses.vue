@@ -199,6 +199,7 @@
         <!-- Budget Info -->
         <el-tab-pane name="schedule">
           <span slot="label"><i class="el-icon-timer"></i> Schedule Info</span>
+          <Schedule />
         </el-tab-pane>
       </el-tabs>
     </el-form>
