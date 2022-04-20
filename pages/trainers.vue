@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ApplicationHandler ref="handleAction"></ApplicationHandler>
+    <AddTrainer ref="handleAction"></AddTrainer>
 
     <el-row :gutter="10" class="mb-2 mt-40">
       <el-col :sm="21" :md="21">
@@ -17,7 +17,7 @@
       </el-col>
 
       <el-col :sm="3" :md="3">
-        <el-button icon="el-icon-plus" type="primary">
+        <el-button icon="el-icon-plus" type="primary" @click="addTrainerModal">
           Add a Trainer
         </el-button>
       </el-col>
@@ -133,6 +133,9 @@ export default Vue.extend({
       })
       this.trainersData = tableData
       this.tableLoading = false
+    },
+    addTrainerModal(): void {
+      ;(this as any).$refs.handleAction.showAddTrainerModal()
     },
   },
 })
