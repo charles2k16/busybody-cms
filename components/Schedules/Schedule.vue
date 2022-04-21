@@ -3,13 +3,55 @@
     <el-row>
       <span>Select Day</span>
       <el-row class="all_days">
-        <el-button class="all" size="mini" @click="showSun">SUN</el-button>
-        <el-button class="all" size="mini" @click="showMon">MON</el-button>
-        <el-button class="all" size="mini" @click="showTues">TUES</el-button>
-        <el-button class="all" size="mini" @click="showWed">WED</el-button>
-        <el-button class="all" size="mini" @click="showThurs">THURS</el-button>
-        <el-button class="all" size="mini" @click="showFri">FRI</el-button>
-        <el-button class="all" size="mini" @click="showSat">SAT</el-button>
+        <el-button
+          class="all"
+          :style="day.SUN.isDay ? active : ''"
+          size="mini"
+          @click="showSun"
+          >SUN</el-button
+        >
+        <el-button
+          class="all"
+          :style="day.MON.isDay ? active : ''"
+          size="mini"
+          @click="showMon"
+          >MON</el-button
+        >
+        <el-button
+          class="all"
+          :style="day.TUES.isDay ? active : ''"
+          size="mini"
+          @click="showTues"
+          >TUES</el-button
+        >
+        <el-button
+          class="all"
+          :style="day.WED.isDay ? active : ''"
+          size="mini"
+          @click="showWed"
+          >WED</el-button
+        >
+        <el-button
+          class="all"
+          :style="day.THURS.isDay ? active : ''"
+          size="mini"
+          @click="showThurs"
+          >THURS</el-button
+        >
+        <el-button
+          class="all"
+          :style="day.FRI.isDay ? active : ''"
+          size="mini"
+          @click="showFri"
+          >FRI</el-button
+        >
+        <el-button
+          class="all"
+          :style="day.SAT.isDay ? active : ''"
+          size="mini"
+          @click="showSat"
+          >SAT</el-button
+        >
       </el-row>
     </el-row>
     <div v-if="day.SUN.isDay">
@@ -40,7 +82,6 @@
           v-for="(schedule, index) in day.MON.schedule"
           :key="`input-${index}`"
         >
-          {{ index }}
           <schedule-time day="SUN">
             <template slot="delete">
               <el-button
@@ -206,6 +247,9 @@ export default Vue.extend({
 
   data() {
     return {
+      active: {
+        background: 'rgb(230, 228, 228)',
+      },
       day: {
         SUN: {
           isDay: false as boolean,
@@ -334,12 +378,14 @@ export default Vue.extend({
   .all {
     margin-bottom: 5px;
     padding: 5px;
+    // background: rgb(230, 228, 228);
   }
 }
 p {
   padding: 10px 0;
   .day {
     font-weight: 900;
+
     font-size: 18px;
   }
 }
@@ -355,19 +401,30 @@ p {
   }
   .add_icon {
     position: relative;
+    top: -53px;
+    left: -7%;
     padding: 5px !important;
     align-self: flex-end;
-    margin-bottom: 8px;
-    margin-left: 8px;
   }
   .delete {
-    position: relative;
-    padding: 5px !important;
+    padding: 5px;
     align-self: flex-end;
+    color: red;
   }
   i {
     padding: 0 5px;
     font-size: 20px;
+  }
+}
+@media (min-width: 1024px) {
+  .add_icon {
+    left: 200px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .add_icon {
+    top: -55px;
   }
 }
 </style>

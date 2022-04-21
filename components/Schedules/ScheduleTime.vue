@@ -2,7 +2,7 @@
   <div style="padding-bottom: 20px">
     <div>
       <el-row class="time_container">
-        <el-row>
+        <el-row class="time_lapse_container">
           <el-time-select
             v-model="startTime"
             placeholder="Start time"
@@ -17,7 +17,7 @@
           <el-time-select
             v-model="endTime"
             placeholder="End time"
-            class="time_lapse"
+            class="time_lapse ent_time"
             :picker-options="{
               start: '08:30',
               step: '00:15',
@@ -28,7 +28,7 @@
           </el-time-select>
         </el-row>
         <div class="icons">
-          <el-button type="default" class="add_icon" @click="showTrainerDetails"
+          <el-button type="default" class="set_icon" @click="showTrainerDetails"
             ><i class="el-icon-s-tools"></i
           ></el-button>
           <slot name="delete"></slot>
@@ -37,7 +37,7 @@
     </div>
     <div v-if="showDetails" class="schedule_details">
       <el-form ref="form" :model="form">
-        <el-form-item label="location">
+        <el-form-item label="Location">
           <el-select
             v-model="form.location"
             placeholder="please select location"
@@ -152,6 +152,10 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .time_container {
   display: flex;
+  flex-direction: column;
+  .time_lapse {
+    margin-bottom: 5px;
+  }
 }
 
 .schedule_details {
@@ -164,16 +168,51 @@ export default Vue.extend({
 
 .icons {
   display: flex;
-  flex-direction: column;
-  // padding: 10px 0;
-  .add_icon {
+  padding-top: 5px;
+  justify-content: center;
+  align-items: flex-end;
+  .set_icon {
     padding: 5px;
-    margin-left: 8px;
-    margin-bottom: 5px;
+    i {
+      padding: 0 5px;
+      font-size: 20px;
+    }
   }
-  i {
-    padding: 0 5px;
-    font-size: 20px;
+}
+
+@media (min-width: 1024px) {
+  .time_lapse_container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .ent_time {
+    margin-left: 5px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .time_container {
+    flex-direction: row;
+    // justify-content: space-between;
+    .time_lapse_container {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      .time_lapse {
+        width: 100%;
+      }
+    }
+  }
+
+  .ent_time {
+    margin-left: 0;
+  }
+
+  .icons {
+    width: 30%;
+    margin-left: 20px;
+    justify-content: flex-end;
   }
 }
 </style>

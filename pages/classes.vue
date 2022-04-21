@@ -222,7 +222,7 @@ export default Vue.extend({
       ;(this as any).$refs.handleAction.showAddClassModal()
     },
     addClass(): void {
-      // this.$classApi.create(this.classId).then(() => this.$fetch)
+      // this.$classApi.create().then(() => this.$fetch)
     },
     deleteClass(): void {
       this.$classApi.delete(this.classId).then(() => this.$fetch)

@@ -1,6 +1,3 @@
-<template ref="updateAction">
-  <el-button type="text" @click="open">Click to open the Message Box</el-button>
-</template>
 <script>
 export default {
   props: {
