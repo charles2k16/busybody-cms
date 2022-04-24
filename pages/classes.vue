@@ -1,9 +1,6 @@
 <template>
   <div>
-    <ApplicationHandler
-      ref="handleAction"
-      @newClass="addClass"
-    ></ApplicationHandler>
+    <ModalHandler ref="handleModal" @newClass="addClass"></ModalHandler>
     <DeleteModal
       ref="updateAction"
       file="class"
@@ -89,7 +86,7 @@
       </el-col>
 
       <el-col :sm="3" :md="3">
-        <el-button icon="el-icon-plus" type="primary" @click="addClassModal">
+        <el-button icon="el-icon-plus" type="primary" @click="addClass">
           Add a Class
         </el-button>
       </el-col>
@@ -218,11 +215,8 @@ export default Vue.extend({
       this.classId = classId
       ;(this as any).$refs.updateAction.open()
     },
-    addClassModal(): void {
-      ;(this as any).$refs.handleAction.showAddClassModal()
-    },
     addClass(): void {
-      // this.$classApi.create().then(() => this.$fetch)
+      ;(this as any).$refs.handleModal.addClassModal(this.$fetch)
     },
     deleteClass(): void {
       this.$classApi.delete(this.classId).then(() => this.$fetch)

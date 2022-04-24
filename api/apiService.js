@@ -1,8 +1,8 @@
 // Provide nuxt-axios instance to use same configuration across the whole project
 // I've used typical CRUD method names and actions here
 export default ($axios) => (resource) => ({
-  index(query) {
-    return $axios.$get(`${resource}`, query)
+  index(path = '', query) {
+    return $axios.$get(`${resource}${path}`, query)
   },
 
   show(id) {
@@ -22,7 +22,7 @@ export default ($axios) => (resource) => ({
   },
 
   // user types
-  userTypes(path, query) {
-    return $axios.$get(`${resource}/${path}`, query)
-  },
+  // userTypes(path = '', query) {
+  //   return $axios.$get(`${resource}/${path}`, query)
+  // },
 })

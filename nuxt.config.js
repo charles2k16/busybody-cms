@@ -52,6 +52,7 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  // local url = 'http://localhost:5000/api/v1'
   axios: {
     baseURL: 'http://54.197.159.224:5000/api/v1',
   },

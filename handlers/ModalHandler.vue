@@ -1,9 +1,10 @@
 <template>
   <div>
-    <!-- add new enquiry dialog -->
+    <!-- Add Class dialog -->
     <el-dialog
-      :visible.sync="showClassModal"
+      :visible.sync="showAddClassModal"
       width="40%"
+      :destroy-on-close="true"
       custom-class="mobile-modal"
     >
       <template slot="title">
@@ -12,7 +13,7 @@
           All fields should be filled for accurate class filtering.
         </p>
       </template>
-      <AddClasses v-if="showClassModal" />
+      <AddClasses @closeClassModal="closeAddClassModal" />
     </el-dialog>
   </div>
 </template>
@@ -25,13 +26,22 @@ export default Vue.extend({
   data() {
     return {
       modalTitle: '' as string,
-      showClassModal: false as boolean,
+      showAddClassModal: false as boolean,
+      successFunc: null as any,
     }
   },
   methods: {
-    showAddClassModal(): void {
+    addClassModal(refereshTable: any): void {
       this.modalTitle = 'Add Classes'
-      this.showClassModal = true
+      this.successFunc = refereshTable
+      this.showAddClassModal = true
+    },
+    closeAddClassModal() {
+      this.closeModal(this.successFunc)
+      this.showAddClassModal = false
+    },
+    closeModal(done: any) {
+      done()
     },
   },
 })
