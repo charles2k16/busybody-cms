@@ -10,17 +10,8 @@ declare interface classDetail {
   facility: string
   trainers: Array<string>
   images: Array<string>
+  schedules: Array<object>
 }
-
-// declare interface day {
-//   SUN: string
-//   MON: string
-//   TUES: string
-//   WED: string
-//   THURS: string
-//   FRI: string
-//   SAT: string
-// }
 
 export interface IClassState {
   classDetails: classDetail
@@ -29,6 +20,7 @@ export interface IClassState {
   trainers: Array<object>
   activeTab: string
   queryParams: object
+  loading: Boolean
 }
 
 export interface IUser {

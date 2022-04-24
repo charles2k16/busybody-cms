@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ModalHandler ref="handleModal" @newClass="addClass"></ModalHandler>
+    <ModalHandler ref="handleModal"></ModalHandler>
     <DeleteModal
       ref="updateAction"
       file="class"
@@ -219,7 +219,7 @@ export default Vue.extend({
       ;(this as any).$refs.handleModal.addClassModal(this.$fetch)
     },
     deleteClass(): void {
-      this.$classApi.delete(this.classId).then(() => this.$fetch)
+      this.$classApi.delete(this.classId).then(() => this.$fetch())
     },
   },
 })

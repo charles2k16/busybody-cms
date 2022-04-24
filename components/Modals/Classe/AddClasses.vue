@@ -20,7 +20,6 @@
           <span slot="label"
             ><i class="el-icon-document-copy mr-5"></i> Class Details</span
           >
-
           <el-form-item prop="name">
             <el-input
               v-model="classDetails.name"
@@ -199,9 +198,14 @@
         <!-- Budget Info -->
         <el-tab-pane name="schedule">
           <span slot="label"><i class="el-icon-timer"></i> Schedule Info</span>
-          <Schedule />
+          <Schedule @schedules="getSchedules" />
         </el-tab-pane>
       </el-tabs>
+      <div style="display: flex; justify-content: flex-end; margin-top: 20px">
+        <el-button type="primary" :loading="loading" @click="submitClass"
+          >Submit</el-button
+        >
+      </div>
     </el-form>
   </div>
 </template>
@@ -226,7 +230,9 @@ export default Vue.extend({
         facility: '',
         trainers: [],
         images: [''],
+        schedules: [],
       },
+      loading: false,
       classCategories: [],
       facilities: [],
       trainers: [],
@@ -253,6 +259,22 @@ export default Vue.extend({
     addCategory() {
       const namew = (this as any as IMixinState).getFullName('ghss', 'errdd')
       console.log(namew)
+    },
+    getSchedules(schedules: Array<object>) {
+      this.classDetails.schedules = schedules
+    },
+    submitClass() {
+      this.loading = true
+      this.$emit('closeClassModal')
+      this.$classApi
+        .create(this.classDetails)
+        .then((res) => {
+          console.log(res)
+          this.loading = false
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
   },
 })

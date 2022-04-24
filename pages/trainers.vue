@@ -1,6 +1,11 @@
 <template>
   <div>
-    <AddTrainer ref="handleAction"></AddTrainer>
+    <ModalHandler ref="handleAction" />
+
+    <DeleteModal
+      ref="deleteAction"
+      @confirmDelete="deleteTrainer"
+    ></DeleteModal>
 
     <el-row :gutter="10" class="mb-2 mt-40">
       <el-col :sm="21" :md="21">
@@ -65,7 +70,7 @@
               type="danger"
               icon="el-icon-delete"
               circle
-              @click="deleteTrainer(props.row._id)"
+              @click="deleteTrainerModal(props.row._id)"
             ></el-button>
           </template>
         </el-table-column>
@@ -97,6 +102,7 @@ export default Vue.extend({
       search: '' as string,
       trainersData: [] as Array<object>,
       tableLoading: true as boolean,
+      trainerId: '' as string,
       queryParams: {
         page: 1 as number,
         limit: 20 as number,
@@ -112,9 +118,6 @@ export default Vue.extend({
     }
   },
   methods: {
-    deleteTrainer(trainerId: String): void {
-      console.log(trainerId)
-    },
     loadDataTable(trainers: Array<IUser>) {
       const self = this
       // i used bbClass to represent a single class object. because javascript uses the keyword class
@@ -131,8 +134,15 @@ export default Vue.extend({
       this.trainersData = tableData
       this.tableLoading = false
     },
+    deleteTrainerModal(trainerId: string): void {
+      console.log(trainerId)
+      this.trainerId = trainerId
+    },
+    deleteTrainer() {
+      // this.$trainersApi.delete(this.trainerId).then(() => this.$fetch())
+    },
     addTrainerModal(): void {
-      ;(this as any).$refs.handleAction.showAddTrainerModal()
+      ;(this as any).$refs.handleAction.addTrainerModal(this.$fetch)
     },
   },
 })

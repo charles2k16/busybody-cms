@@ -3,8 +3,9 @@
     <ModalHandler ref="handleAction" />
 
     <DeleteModal
-      ref="deleteAction"
-      @confirmDelete="deleteFacility"
+      ref="updateAction"
+      file="facility"
+      @confirmDelete="deleteCategory"
     ></DeleteModal>
 
     <el-row :gutter="10" class="mb-2 mt-40">
@@ -25,15 +26,15 @@
         <el-button
           icon="el-icon-plus"
           type="primary"
-          @click="showFacilityModal"
+          @click="showCategoryModal"
         >
-          Add a Facility
+          Add a Category
         </el-button>
       </el-col>
     </el-row>
 
     <el-card class="mt-40">
-      <el-table v-loading="tableLoading" :data="facilitiesData" stripe>
+      <el-table v-loading="tableLoading" :data="categoriesData" stripe>
         <el-table-column prop="name" label="Name" />
         <el-table-column prop="description" label="Description" width="400" />
         <el-table-column label="Bookable" align="center">
@@ -60,7 +61,7 @@
               type="danger"
               icon="el-icon-delete"
               circle
-              @click="deleteFacilityModal(props.row._id)"
+              @click="deleteCategoryModal(props.row._id)"
             ></el-button>
           </template>
         </el-table-column>
@@ -88,32 +89,31 @@ export default Vue.extend({
   data() {
     return {
       search: '' as string,
-      facilitiesData: [] as Array<object>,
+      categoriesData: [] as Array<object>,
       tableLoading: true as boolean,
-      facilityId: null as any,
+      categoryId: '' as string,
     }
   },
   async fetch() {
     try {
-      const facilities = await this.$facilitiesApi.index()
-      this.facilitiesData = facilities.data
-      console.log(facilities)
+      const categories = await this.$categoriesApi.index()
+      this.categoriesData = categories.data
       this.tableLoading = false
     } catch (err) {
       console.log(err)
     }
   },
   methods: {
-    deleteFacilityModal(id: string) {
+    deleteCategoryModal(id: string) {
       console.log(id)
-      this.facilityId = id
-      ;(this as any).$refs.deleteAction.open()
+      this.categoryId = id
+      ;(this as any).$refs.updateAction.open()
     },
-    deleteFacility() {
-      this.$facilitiesApi.delete(this.facilityId).then(() => this.$fetch())
+    deleteCategory() {
+      this.$categoriesApi.delete(this.categoryId).then(() => this.$fetch())
     },
-    showFacilityModal(): void {
-      ;(this as any).$refs.handleAction.addFacilityModal(this.$fetch)
+    showCategoryModal(): void {
+      ;(this as any).$refs.handleAction.addCategoryModal(this.$fetch)
     },
   },
 })
