@@ -4,11 +4,14 @@
     <el-form ref="trainer" v-model="trainerDetails" label-position="top">
       <div class="facility">
         <el-form-item label="First Name">
-          <el-input v-model="trainerDetails.firstName" placeholder="First name">
+          <el-input
+            v-model="trainerDetails.first_name"
+            placeholder="First name"
+          >
           </el-input>
         </el-form-item>
         <el-form-item label="Last Name">
-          <el-input v-model="trainerDetails.lastName" placeholder="Last Name">
+          <el-input v-model="trainerDetails.last_name" placeholder="Last Name">
           </el-input>
         </el-form-item>
         <el-form-item label="Email">
@@ -23,18 +26,12 @@
           >
           </el-input>
         </el-form-item>
-        <el-row :gutter="10" class="mt-20">
-          <el-col :md="24" :xs="24" :sm="24">
-            <label class="mb-10 d-block">Profile picture</label>
-            <ImageUpload />
-          </el-col>
-        </el-row>
         <el-form-item class="input_spacing facility_submit">
           <el-button
             type="primary"
             :loading="loading"
             :disabled="!isValid"
-            @click="submitFacility"
+            @click="submitTrainer"
             >Submit</el-button
           >
         </el-form-item>
@@ -53,40 +50,39 @@ export default Vue.extend({
     return {
       loading: false,
       trainerDetails: {
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         phone: '',
-        profilePic: '',
       },
     }
   },
   computed: {
     isValid(): boolean {
       return (
-        this.trainerDetails.firstName !== '' &&
-        this.trainerDetails.lastName !== '' &&
+        this.trainerDetails.first_name !== '' &&
+        this.trainerDetails.last_name !== '' &&
         this.trainerDetails.email !== '' &&
-        this.trainerDetails.phone !== '' &&
-        this.trainerDetails.profilePic !== ''
+        this.trainerDetails.phone !== ''
       )
     },
   },
   methods: {
     submitTrainer(): void {
-      //  this.$trainersApi.create(this.trainerDetails)
-      //   .then((res) => {
-      //     console.log(res)
-      //     this.loading = false
-      //     this.$message.success('Category Created Successfully!')
-      //     this.$fetch()
-      //   })
-      //   .catch((err) => {
-      //     if (err?.data) {
-      //       this.$message.error('An Error Occured!')
-      //     }
-      //     console.log(err)
-      //   })
+      this.$userApi
+        .create(this.trainerDetails)
+        .then((res) => {
+          console.log(res)
+          this.loading = false
+          this.$message.success('Trainer Created Successfully!')
+          this.$fetch()
+        })
+        .catch((err) => {
+          if (err?.data) {
+            this.$message.error('An error occured!')
+          }
+          console.log(err)
+        })
     },
   },
 })

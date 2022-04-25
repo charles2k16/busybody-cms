@@ -13,5 +13,4 @@ export default (ctx, inject) => {
   inject('categoriesApi', apiService('/categories'))
   inject('facilitiesApi', apiService('/facilities'))
   inject('rolesApi', apiService('/user-types'))
-  inject('trainersApi', apiService('/trainers'))
 }

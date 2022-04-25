@@ -36,7 +36,7 @@
     <el-card class="mt-40">
       <el-table v-loading="tableLoading" :data="categoriesData" stripe>
         <el-table-column prop="name" label="Name" />
-        <el-table-column prop="description" label="Description" width="400" />
+        <el-table-column prop="slug" label="Slug" width="400" />
         <el-table-column label="Bookable" align="center">
           <template #default="props">
             <el-tag
@@ -52,10 +52,15 @@
             <el-tooltip
               class="item"
               effect="dark"
-              content="Edit Facility"
+              content="Edit Category"
               placement="top"
             >
-              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-edit"
+                circle
+                @click="showUpdateCategoryModal(props.row._id)"
+              ></el-button>
             </el-tooltip>
             <el-button
               type="danger"
@@ -98,6 +103,7 @@ export default Vue.extend({
     try {
       const categories = await this.$categoriesApi.index()
       this.categoriesData = categories.data
+      console.log(categories.data)
       this.tableLoading = false
     } catch (err) {
       console.log(err)
@@ -114,6 +120,9 @@ export default Vue.extend({
     },
     showCategoryModal(): void {
       ;(this as any).$refs.handleAction.addCategoryModal(this.$fetch)
+    },
+    showUpdateCategoryModal(id: string): void {
+      ;(this as any).$refs.handleAction.updateCategoryModal(this.$fetch, id)
     },
   },
 })

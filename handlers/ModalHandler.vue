@@ -24,10 +24,10 @@
       <template slot="title">
         <h3>{{ modalTitle }}</h3>
         <p class="mt-10">
-          All fields should be filled for accurate class filtering.
+          All fields should be filled for accurate facility filtering.
         </p>
       </template>
-      <AddFacilityModal @closeClassModal="closeAddFacilityModal" />
+      <AddFacility @closeClassModal="closeAddFacilityModal" />
     </el-dialog>
     <el-dialog
       :visible.sync="showAddCategoryModal"
@@ -38,10 +38,10 @@
       <template slot="title">
         <h3>{{ modalTitle }}</h3>
         <p class="mt-10">
-          All fields should be filled for accurate class filtering.
+          All fields should be filled for accurate category filtering.
         </p>
       </template>
-      <AddCategoryModal @closeClassModal="closeAddCategoryModal" />
+      <AddCategory @closeClassModal="closeAddCategoryModal" />
     </el-dialog>
     <el-dialog
       :visible.sync="showAddTrainerModal"
@@ -52,10 +52,24 @@
       <template slot="title">
         <h3>{{ modalTitle }}</h3>
         <p class="mt-10">
-          All fields should be filled for accurate class filtering.
+          All fields should be filled for accurate trainer filtering.
         </p>
       </template>
-      <AddCategoryModal @closeClassModal="closeAddTrainerModal" />
+      <AddTrainer @closeClassModal="closeAddTrainerModal" />
+    </el-dialog>
+    <el-dialog
+      :visible.sync="showUpdateCategoryModal"
+      width="40%"
+      :destroy-on-close="true"
+      custom-class="mobile-modal"
+    >
+      <template slot="title">
+        <h3>{{ modalTitle }}</h3>
+        <p class="mt-10">
+          All fields should be filled for accurate category filtering.
+        </p>
+      </template>
+      <UpdateCategory @closeClassModal="closeUpdateCategoryModal" />
     </el-dialog>
   </div>
 </template>
@@ -68,10 +82,12 @@ export default Vue.extend({
   data() {
     return {
       modalTitle: '' as string,
+      categoryId: '' as string,
       showAddClassModal: false as boolean,
       showAddFacilityModal: false as boolean,
       showAddCategoryModal: false as boolean,
       showAddTrainerModal: false as boolean,
+      showUpdateCategoryModal: false as boolean,
       successFunc: null as any,
     }
   },
@@ -111,6 +127,16 @@ export default Vue.extend({
     closeAddTrainerModal() {
       this.closeModal(this.successFunc)
       this.showAddTrainerModal = false
+    },
+    updateCategoryModal(refereshTable: any, id: string): void {
+      this.categoryId = id
+      this.modalTitle = 'Update Category'
+      this.successFunc = refereshTable
+      this.showUpdateCategoryModal = true
+    },
+    closeUpdateCategoryModal() {
+      this.closeModal(this.successFunc)
+      this.showUpdateCategoryModal = false
     },
     closeModal(done: any) {
       done()

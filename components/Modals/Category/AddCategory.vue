@@ -10,14 +10,8 @@
       <el-form-item label="Category name">
         <el-input v-model="categoryDetails.name" placeholder="name"> </el-input>
       </el-form-item>
-      <el-form-item label="Category description">
-        <el-input
-          v-model="categoryDetails.description"
-          type="textarea"
-          rows="3"
-          placeholder="description"
-        >
-        </el-input>
+      <el-form-item label="Category Slug">
+        <el-input v-model="categoryDetails.slug" placeholder="slug"> </el-input>
       </el-form-item>
       <el-form-item class="facility_submit">
         <el-button
@@ -42,15 +36,14 @@ export default Vue.extend({
       loading: false,
       categoryDetails: {
         name: '' as string,
-        description: '' as string,
+        slug: '' as string,
       },
     }
   },
   computed: {
     isValid(): boolean {
       return (
-        this.categoryDetails.name !== '' &&
-        this.categoryDetails.description !== ''
+        this.categoryDetails.name !== '' && this.categoryDetails.slug !== ''
       )
     },
   },
