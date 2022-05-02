@@ -22,6 +22,7 @@ interface apiService {
   index: Function
   create: (params: object) => Promise<any>
   delete: (params: string) => Promise<any>
+  update: (id: string, payload: any) => Promise<any>
   userTypes: (path: string, params: object) => Promise<any>
   //  (query: object): Promise<any>
 }

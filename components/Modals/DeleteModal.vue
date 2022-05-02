@@ -1,23 +1,18 @@
+<template>
+  <!-- <el-popconfirm title="Are you sure to delete this?">
+    <el-button slot="reference">Delete</el-button>
+  </el-popconfirm> -->
+  <div></div>
+</template>
 <script>
 export default {
-  props: {
-    file: {
-      type: String,
-      required: true,
-    },
-  },
-
   methods: {
     open() {
-      this.$confirm(
-        `This will permanently delete the ${this.file}. Continue?`,
-        'Warning',
-        {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
-          type: 'error',
-        }
-      )
+      this.$confirm(`This will permanently delete this. Continue?`, 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      })
         .then(() => {
           this.$message({
             type: 'success',

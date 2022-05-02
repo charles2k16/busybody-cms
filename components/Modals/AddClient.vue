@@ -47,12 +47,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { trainerDetails } from '@/types/modals/addModals'
 
 export default Vue.extend({
   name: 'AddClient',
 
-  data(): trainerDetails {
+  data() {
     return {
       modalTitle: '' as string,
       showTrainerModal: false as boolean,

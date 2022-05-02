@@ -22,7 +22,7 @@ export default ($axios) => (resource) => ({
   },
 
   // user types
-  // userTypes(path = '', query) {
-  //   return $axios.$get(`${resource}/${path}`, query)
-  // },
+  userTypes(path = '', query) {
+    return $axios.$get(`${resource}/${path}`, query)
+  },
 })

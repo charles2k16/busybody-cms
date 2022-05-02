@@ -34,14 +34,17 @@
             <el-menu-item index="4-1" :route="{ path: '/classes' }"
               >Classes</el-menu-item
             >
-            <el-menu-item index="4-2" :route="{ path: '/facilities' }"
+            <el-menu-item index="4-2" :route="{ path: '/categories' }"
+              >Categories</el-menu-item
+            >
+            <el-menu-item index="4-3" :route="{ path: '/facilities' }"
               >Facilities</el-menu-item
             >
-            <el-menu-item index="4-3" :route="{ path: '/trainers' }"
+            <el-menu-item index="4-4" :route="{ path: '/trainers' }"
               >Trainers</el-menu-item
             >
 
-            <el-menu-item index="4-4" :route="{ path: '/clients' }"
+            <el-menu-item index="4-5" :route="{ path: '/clients' }"
               >Clients</el-menu-item
             >
           </el-menu-item-group>

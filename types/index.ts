@@ -10,7 +10,12 @@ declare interface classDetail {
   facility: string
   trainers: Array<string>
   images: Array<string>
+  schedules: Array<object>
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f1f0d0451bbc10f529d925abb28b900a73a43201
 export interface IClassState {
   classDetails: classDetail
   classCategories: Array<object>
@@ -18,6 +23,7 @@ export interface IClassState {
   trainers: Array<object>
   activeTab: string
   queryParams: object
+  loading: Boolean
 }
 
 export interface IUser {
