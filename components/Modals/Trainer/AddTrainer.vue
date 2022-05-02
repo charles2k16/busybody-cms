@@ -2,6 +2,7 @@
   <div>
     <!-- add new enquiry dialog -->
     <el-form ref="trainer" v-model="trainerDetails" label-position="top">
+      <p v-if="notMatch">* {{ notMatch }}</p>
       <div class="facility">
         <el-form-item label="First Name">
           <el-input
@@ -13,6 +14,13 @@
         <el-form-item label="Last Name">
           <el-input v-model="trainerDetails.last_name" placeholder="Last Name">
           </el-input>
+        </el-form-item>
+        <el-form-item label="Password">
+          <el-input v-model="trainerDetails.password" placeholder="Last Name">
+          </el-input>
+        </el-form-item>
+        <el-form-item label="Confirm Password">
+          <el-input v-model="confirmpass" placeholder="Last Name"> </el-input>
         </el-form-item>
         <el-form-item label="Email">
           <el-input v-model="trainerDetails.email" placeholder="body@gym.com">
@@ -49,11 +57,14 @@ export default Vue.extend({
   data() {
     return {
       loading: false,
+      confirmPass: '' as string,
+      notMatch: false as Boolean,
       trainerDetails: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
+        first_name: '' as string,
+        last_name: '' as string,
+        password: '' as string,
+        email: '' as string,
+        phone: '' as string,
       },
     }
   },
@@ -62,6 +73,7 @@ export default Vue.extend({
       return (
         this.trainerDetails.first_name !== '' &&
         this.trainerDetails.last_name !== '' &&
+        this.trainerDetails.password !== '' &&
         this.trainerDetails.email !== '' &&
         this.trainerDetails.phone !== ''
       )
@@ -69,6 +81,9 @@ export default Vue.extend({
   },
   methods: {
     submitTrainer(): void {
+      if (this.confirmPass !== this.trainerDetails.password) {
+        this.notMatch = true
+      }
       this.$userApi
         .create(this.trainerDetails)
         .then((res) => {
