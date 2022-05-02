@@ -1,20 +1,6 @@
 <template>
   <div>
     <el-form ref="classDetails" :model="classDetails" label-position="top">
-      <!-- <div class="d-flex_align_center">
-        <span>Categories</span>
-        <div class="d-flex_justify-between">
-          <div
-            v-for="(category, index) in classCategories"
-            :key="index"
-            class="d-flex_column_center mr-20"
-          >
-            <span class="category_circles"></span>
-            <span class="d-block">{{ category.name }}</span>
-          </div>
-        </div>
-      </div> -->
-
       <el-tabs v-model="activeTab" class="mt-4 px-2" stretch type="border-card">
         <el-tab-pane name="details">
           <span slot="label"

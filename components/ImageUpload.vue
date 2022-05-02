@@ -10,26 +10,6 @@
       </p>
     </div>
   </div>
-  <!-- <div>
-    <el-upload
-      class="upload-demo"
-      drag
-      action=""
-      :auto-upload="false"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :file-list="fileList"
-      multiple
-    >
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">
-        Drop file here or <em>click to upload</em>
-      </div>
-      <div class="el-upload__tip" slot="tip">
-        Photo should be in standard format JPG, PNG and no more than 2MB
-      </div>
-    </el-upload>
-  </div> -->
 </template>
 
 <script lang="ts">

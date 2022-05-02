@@ -1,11 +1,10 @@
 <template>
   <div>
-    <ModalHandler ref="handleModal" @newClass="addClass"></ModalHandler>
-    <DeleteModal
+    <ModalHandler ref="handleModal"></ModalHandler>
+    <!-- <DeleteModal
       ref="updateAction"
-      file="class"
       @confirmDelete="deleteClass"
-    ></DeleteModal>
+    ></DeleteModal> -->
 
     <el-row :gutter="10" class="mb-2 mt-20">
       <el-col :sm="21" :md="21">

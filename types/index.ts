@@ -11,17 +11,6 @@ declare interface classDetail {
   trainers: Array<string>
   images: Array<string>
 }
-
-// declare interface day {
-//   SUN: string
-//   MON: string
-//   TUES: string
-//   WED: string
-//   THURS: string
-//   FRI: string
-//   SAT: string
-// }
-
 export interface IClassState {
   classDetails: classDetail
   classCategories: Array<object>
