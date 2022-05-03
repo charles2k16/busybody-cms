@@ -17,8 +17,6 @@
         Photo should be in standard format JPG, PNG and no more than 2MB
       </p>
     </div>
-<<<<<<< HEAD
-=======
   </div> -->
   <div>
     {{ fileList }}
@@ -41,7 +39,6 @@
         Photo should be in standard format JPG, PNG and no more than 2MB
       </div>
     </el-upload>
->>>>>>> f1f0d0451bbc10f529d925abb28b900a73a43201
   </div>
 </template>
 
