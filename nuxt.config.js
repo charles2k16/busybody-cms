@@ -60,7 +60,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   // local url = 'http://localhost:5000/api/v1'
   axios: {
-    baseURL: 'http://localhost:5000/api/v1',
+    baseURL: 'https://busybodyapi.herokuapp.com/api/v1',
   },
 
   auth: {
