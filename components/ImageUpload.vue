@@ -19,7 +19,6 @@
     </div>
   </div> -->
   <div>
-    {{ fileList }}
     <el-upload
       class="upload-demo"
       drag

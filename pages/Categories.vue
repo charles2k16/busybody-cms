@@ -1,9 +1,10 @@
 <template>
   <div>
     <ModalHandler ref="handleAction" />
+    <UpdateModalHandler ref="updateAction" />
 
     <DeleteModal
-      ref="updateAction"
+      ref="deleteAction"
       file="facility"
       @confirmDelete="deleteCategory"
     ></DeleteModal>
@@ -59,7 +60,13 @@
                 type="primary"
                 icon="el-icon-edit"
                 circle
-                @click="showUpdateCategoryModal(props.row._id)"
+                @click="
+                  showUpdateCategoryModal(
+                    props.row._id,
+                    props.row.name,
+                    props.row.slug
+                  )
+                "
               ></el-button>
             </el-tooltip>
             <el-button
@@ -88,9 +95,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import UpdateModalHandler from '@/handlers/UpdateModalHandler.vue'
 
 export default Vue.extend({
   name: 'Clients',
+  components: {
+    UpdateModalHandler,
+  },
   data() {
     return {
       search: '' as string,
@@ -111,9 +122,8 @@ export default Vue.extend({
   },
   methods: {
     deleteCategoryModal(id: string) {
-      console.log(id)
       this.categoryId = id
-      ;(this as any).$refs.updateAction.open()
+      ;(this as any).$refs.deleteAction.open()
     },
     deleteCategory() {
       this.$categoriesApi.delete(this.categoryId).then(() => this.$fetch())
@@ -121,8 +131,12 @@ export default Vue.extend({
     showCategoryModal(): void {
       ;(this as any).$refs.handleAction.addCategoryModal(this.$fetch)
     },
-    showUpdateCategoryModal(id: string): void {
-      ;(this as any).$refs.handleAction.updateCategoryModal(this.$fetch, id)
+    showUpdateCategoryModal(id: string, name: string, slug: string): void {
+      ;(this as any).$refs.updateAction.updateCategoryModal(this.$fetch, {
+        id,
+        name,
+        slug,
+      })
     },
   },
 })

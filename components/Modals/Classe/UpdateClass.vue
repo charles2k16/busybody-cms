@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="classDetails" :model="classDetails" label-position="top">
+    <el-form :model="classDetails" label-position="top">
       <el-tabs v-model="activeTab" class="mt-4 px-2" stretch type="border-card">
         <el-tab-pane name="details">
           <span slot="label"
@@ -183,7 +183,10 @@
         <!-- Budget Info -->
         <el-tab-pane name="schedule">
           <span slot="label"><i class="el-icon-timer"></i> Schedule Info</span>
-          <Schedule @schedules="getSchedules" />
+          <UpdateSchedules
+            :updateschedules="classDetails.schedules"
+            @schedules="getSchedules"
+          />
         </el-tab-pane>
       </el-tabs>
       <div style="display: flex; justify-content: flex-end; margin-top: 20px">
@@ -202,23 +205,33 @@ import { IMixinState } from '@/types/mixinsTypes'
 
 export default Vue.extend({
   name: 'AddClasses',
+  props: {
+    classupdate: {
+      type: Object,
+      required: true,
+      default: () => {
+        return {}
+      },
+    },
+  },
   data(): IClassState {
     return {
       classDetails: {
-        name: '',
-        description: '',
-        capacity: 0,
-        level: '',
-        classType: '',
-        singlePrice: false,
-        category: [],
-        facility: '',
-        trainers: [],
-        images: [''],
-        schedules: [],
+        name: this.classupdate.name,
+        description: this.classupdate.description,
+        capacity: this.classupdate.capacity,
+        level: this.classupdate.level,
+        classType: this.classupdate.classType,
+        singlePrice: this.classupdate.singlePrice,
+        category: this.classupdate.category,
+        facility: this.classupdate.facility,
+        trainers: this.classupdate.trainers,
+        images: this.classupdate.images,
+        schedules: this.classupdate.schedules,
       },
+      class_id: this.classupdate._id,
       loading: false,
-      classCategories: [],
+      classCategories: {},
       facilities: [],
       trainers: [],
       activeTab: 'details',
@@ -228,6 +241,7 @@ export default Vue.extend({
       },
     }
   },
+
   async fetch() {
     const categories = await this.$categoriesApi.index()
     const facilities = await this.$facilitiesApi.index()
@@ -239,6 +253,11 @@ export default Vue.extend({
     this.classCategories = categories.data
     this.facilities = facilities.data
     this.trainers = trainers.data
+  },
+  computed: {
+    update() {
+      return this.classupdate
+    },
   },
   methods: {
     addCategory() {
@@ -252,7 +271,7 @@ export default Vue.extend({
       this.loading = true
       this.$emit('closeClassModal')
       this.$classApi
-        .create(this.classDetails)
+        .update(this.class_id, this.classDetails)
         .then((res) => {
           console.log(res)
           this.loading = false

@@ -1,11 +1,8 @@
 <template>
   <div>
-    <ModalHandler ref="handleModal"></ModalHandler>
-    <!-- <DeleteModal
-    <DeleteModal
-      ref="updateAction"
-      @confirmDelete="deleteClass"
-    ></DeleteModal> -->
+    <ModalHandler ref="handleAction"></ModalHandler>
+    <UpdateModalHandler ref="updateAction"></UpdateModalHandler>
+    <DeleteModal ref="deleteAction" @confirmDelete="deleteClass" />
 
     <el-row :gutter="10" class="mb-2 mt-20">
       <el-col :sm="21" :md="21">
@@ -150,7 +147,12 @@
               content="Edit Class"
               placement="top"
             >
-              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-edit"
+                circle
+                @click="updateClassModal(props.row)"
+              ></el-button>
             </el-tooltip>
             <el-button
               type="danger"
@@ -178,9 +180,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import UpdateModalHandler from '@/handlers/UpdateModalHandler.vue'
 
 export default Vue.extend({
   name: 'Classes',
+  components: {
+    UpdateModalHandler,
+  },
 
   data() {
     return {
@@ -213,10 +219,16 @@ export default Vue.extend({
     },
     deleteClassModal(classId: string): void {
       this.classId = classId
-      ;(this as any).$refs.updateAction.open()
+      ;(this as any).$refs.deleteAction.open()
     },
     addClass(): void {
-      ;(this as any).$refs.handleModal.addClassModal(this.$fetch)
+      ;(this as any).$refs.handleAction.addClassModal(this.$fetch)
+    },
+    updateClassModal(classDetails: Array): void {
+      ;(this as any).$refs.updateAction.updateClassModal(
+        this.$fetch,
+        classDetails
+      )
     },
     deleteClass(): void {
       this.$classApi.delete(this.classId).then(() => this.$fetch())

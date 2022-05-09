@@ -15,41 +15,7 @@
           <el-input v-model="trainerDetails.last_name" placeholder="Last Name">
           </el-input>
         </el-form-item>
-        <el-row :gutter="10" class="mt-20">
-          <el-col :md="22" :xs="24" :sm="24">
-            <el-form-item prop="roles">
-              <el-select
-                v-model="trainerDetails.role"
-                filterable
-                placeholder="Select a Role"
-                class="full_width"
-              >
-                <el-option
-                  v-for="(role, index) in roles"
-                  :key="index"
-                  :label="role.name"
-                  :value="role._id"
-                ></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :md="2" :xs="24" :sm="24">
-            <el-tooltip
-              class="item"
-              effect="dark"
-              content="Add roles"
-              placement="top"
-            >
-              <el-button
-                type="primary"
-                icon="el-icon-plus"
-                circle
-                @click="addCategory"
-              ></el-button>
-            </el-tooltip>
-          </el-col>
-        </el-row>
-        <el-form-item label="Password">
+        <!-- <el-form-item label="Change Password">
           <el-input
             v-model="trainerDetails.password"
             type="password"
@@ -64,11 +30,11 @@
             placeholder="confirm Password"
           >
           </el-input>
-        </el-form-item>
-        <el-form-item label="Email">
+        </el-form-item> -->
+        <!-- <el-form-item label="Email">
           <el-input v-model="trainerDetails.email" placeholder="body@gym.com">
           </el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="Contact">
           <el-input
             v-model="trainerDetails.phone"
@@ -91,68 +57,65 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'AddTrainer',
-
+  name: 'UpdateTrainer',
+  props: {
+    trainer: {
+      type: Object,
+      required: true,
+      default: () => {
+        return {}
+      },
+    },
+  },
   data() {
     return {
       loading: false,
       confirm_pass: '' as string,
       notMatch: '' as string,
       confirm_password: '' as string,
-      roles: [],
       trainerDetails: {
-        first_name: '' as string,
-        last_name: '' as string,
-        role: '' as string,
-        password: '' as string,
-        email: '' as string,
-        phone: '' as string,
+        first_name: this.trainer.first_name as string,
+        last_name: this.trainer.last_name as string,
+        password: this.trainer.password as string,
+        email: this.trainer.email as string,
+        phone: this.trainer.phone as string,
       },
+      trainer_id: this.trainer.id,
     }
-  },
-  async fetch() {
-    const roles = await this.$rolesApi.userTypes()
-    console.log(roles)
-    this.roles = roles.data
   },
   computed: {
     isValid(): boolean {
       return (
         this.trainerDetails.first_name !== '' &&
         this.trainerDetails.last_name !== '' &&
-        this.trainerDetails.password !== '' &&
-        this.confirm_password !== '' &&
-        this.trainerDetails.email !== '' &&
         this.trainerDetails.phone !== ''
       )
     },
   },
   methods: {
-    addCategory() {
-      const namew = (this as any as IMixinState).getFullName('ghss', 'errdd')
-      console.log(namew)
-    },
     submitTrainer(): void {
-      if (this.confirm_pass !== this.trainerDetails.password) {
-        this.notMatch = 'Your password does not match'
-      } else {
-        this.$userApi
-          .create(this.trainerDetails)
-          .then((res) => {
-            console.log(res)
-            this.notMatch = ''
-            this.$emit('closeTrainerModal')
-            this.loading = false
-            this.$message.success('Trainer Created Successfully!')
-          })
-          .catch((err) => {
-            if (err?.data) {
-              this.$message.error('An error occured!')
-            }
-            console.log(err)
-          })
-      }
+      // if (this.confirm_pass !== this.trainerDetails.password) {
+      //   this.notMatch = 'Your password does not match'
+      // }
+      //  else {
+
+      this.$userApi
+        .update(this.trainer_id, this.trainerDetails)
+        .then((res) => {
+          console.log(res)
+          this.notMatch = ''
+          this.$emit('closeTrainerModal')
+          this.loading = false
+          this.$message.success('Trainer Created Successfully!')
+        })
+        .catch((err) => {
+          if (err?.data) {
+            this.$message.error('An error occured!')
+          }
+          console.log(err)
+        })
     },
+    // },
   },
 })
 </script>

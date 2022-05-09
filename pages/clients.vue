@@ -1,6 +1,11 @@
 <template>
   <div>
-    <AddClient ref="handleAction"></AddClient>
+    <ModalHandler ref="handleAction" />
+    <UpdateModalHandler ref="updateAction" />
+    <DeleteModal
+      ref="deleteAction"
+      @confirmDelete="deleteClientModal"
+    ></DeleteModal>
 
     <el-row :gutter="10" class="mb-2 mt-40">
       <el-col :sm="21" :md="21">
@@ -51,7 +56,7 @@
         </el-table-column> -->
 
         <el-table-column>
-          <template #default="">
+          <template slot-scope="props">
             <el-button type="primary">View Profile</el-button>
             <el-tooltip
               class="item"
@@ -59,9 +64,19 @@
               content="Edit Trainer"
               placement="top"
             >
-              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-edit"
+                circle
+                @click="updateClient(props.row)"
+              ></el-button>
             </el-tooltip>
-            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              circle
+              @click="deleteClient(props.row._id)"
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -84,9 +99,13 @@
 import Vue from 'vue'
 import { IUser } from '@/types'
 import { IMixinState } from '@/types/mixinsTypes'
+import UpdateModalHandler from '@/handlers/UpdateModalHandler.vue'
 
 export default Vue.extend({
   name: 'Clients',
+  components: {
+    UpdateModalHandler,
+  },
   data() {
     return {
       search: '' as string,
@@ -96,6 +115,7 @@ export default Vue.extend({
         page: 1 as number,
         limit: 20 as number,
       },
+      clientId: '' as string,
     }
   },
   async fetch() {
@@ -122,9 +142,20 @@ export default Vue.extend({
       })
       this.clientsData = tableData
       this.tableLoading = false
+      console.log(tableData)
+    },
+    updateClient(client: object) {
+      ;(this as any).$refs.updateAction.updateClientModal(this.$fetch, client)
+    },
+    deleteClientModal() {
+      this.$userApi.delete(this.clientId).then(() => this.$fetch())
+    },
+    deleteClient(id: string) {
+      this.clientId = id
+      ;(this as any).$refs.deleteAction.open()
     },
     AddClientModal(): void {
-      ;(this as any).$refs.handleAction.showAddClientModal()
+      ;(this as any).$refs.handleAction.addClientModal(this.$fetch)
     },
   },
 })

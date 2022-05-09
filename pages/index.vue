@@ -4,7 +4,7 @@
       <el-col :md="8" :sm="12">
         <el-card shadow="always" class="cards"
           ><div>
-            <div style="display: flex">
+            <div class="card_content">
               <section>
                 <FontAwesomeIcon icon="fa-solid fa-users" class="fontUsers" />
               </section>
@@ -148,7 +148,11 @@ export default {
 <style lang="scss" scoped>
 @media (min-width: 768px) {
   .cards {
-    height: 130px;
+    height: 150px;
+    .card_content {
+      display: flex;
+    }
+
     .fontUsers {
       font-size: 40px;
       color: var(--color-primary);
@@ -159,11 +163,12 @@ export default {
     }
   }
   .second_cards {
-    // height: 300px;
+    height: 500px;
     width: 100%;
     display: flex;
     border-radius: 13px;
     flex-direction: column;
+
     padding: 20px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     .bar_charts {
@@ -177,11 +182,14 @@ export default {
 @media (min-width: 1024px) {
   .cards {
     padding: 10px;
-    height: 150px;
+    height: 200px;
+    .card_content {
+      justify-content: space-between;
+    }
   }
   .second_cards {
     flex-direction: row;
-
+    height: 550px;
     .finance {
       height: 100%;
       width: 30%;
@@ -191,6 +199,14 @@ export default {
     .bar_charts {
       width: 70%;
       overflow: hidden;
+    }
+  }
+}
+@media (min-width: 1440px) {
+  .cards {
+    .card_content {
+      justify-content: space-around;
+      padding: 0 10px;
     }
   }
 }

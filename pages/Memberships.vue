@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AddMember ref="handleAction"></AddMember>
+    <ModalHandler ref="handleAction"></ModalHandler>
 
     <el-row :gutter="10" class="mb-2 mt-40">
       <el-col :sm="20" :md="20">
@@ -98,17 +98,17 @@ export default Vue.extend({
       },
     }
   },
-  // async fetch() {
-  //   try {
-  //     const clients = await this.$rolesApi.userTypes(
-  //       'clients',
-  //       this.queryParams
-  //     )
-  //     this.loadDataTable(clients.data)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // },
+  async fetch() {
+    try {
+      const clients = await this.$rolesApi.userTypes(
+        'clients',
+        this.queryParams
+      )
+      this.loadDataTable(clients.data)
+    } catch (err) {
+      console.log(err)
+    }
+  },
   methods: {
     loadDataTable(clients: Array<IUser>) {
       const self = this

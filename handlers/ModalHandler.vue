@@ -27,7 +27,7 @@
           All fields should be filled for accurate facility filtering.
         </p>
       </template>
-      <AddFacility @closeClassModal="closeAddFacilityModal" />
+      <AddFacility @closeAddFacilityModal="closeAddFacilityModal" />
     </el-dialog>
     <el-dialog
       :visible.sync="showAddCategoryModal"
@@ -41,7 +41,7 @@
           All fields should be filled for accurate category filtering.
         </p>
       </template>
-      <AddCategory @closeClassModal="closeAddCategoryModal" />
+      <AddCategory @closeAddCategoryModal="closeAddCategoryModal" />
     </el-dialog>
     <el-dialog
       :visible.sync="showAddTrainerModal"
@@ -55,10 +55,11 @@
           All fields should be filled for accurate trainer filtering.
         </p>
       </template>
-      <AddTrainer @closeClassModal="closeAddTrainerModal" />
+      <AddTrainer @closeTrainerModal="closeAddTrainerModal" />
     </el-dialog>
+
     <el-dialog
-      :visible.sync="showUpdateCategoryModal"
+      :visible.sync="showAddClientModal"
       width="40%"
       :destroy-on-close="true"
       custom-class="mobile-modal"
@@ -66,10 +67,24 @@
       <template slot="title">
         <h3>{{ modalTitle }}</h3>
         <p class="mt-10">
-          All fields should be filled for accurate category filtering.
+          All fields should be filled for accurate client filtering.
         </p>
       </template>
-      <UpdateCategory @closeClassModal="closeUpdateCategoryModal" />
+      <AddClient @closeClientModal="closeAddClientModal" />
+    </el-dialog>
+    <el-dialog
+      :visible.sync="showAddMemberModal"
+      width="40%"
+      :destroy-on-close="true"
+      custom-class="mobile-modal"
+    >
+      <template slot="title">
+        <h3>{{ modalTitle }}</h3>
+        <p class="mt-10">
+          All fields should be filled for accurate member filtering.
+        </p>
+      </template>
+      <AddMember @closeAddMemberModal="closeAddMemberModal" />
     </el-dialog>
   </div>
 </template>
@@ -82,12 +97,12 @@ export default Vue.extend({
   data() {
     return {
       modalTitle: '' as string,
-      categoryId: '' as string,
       showAddClassModal: false as boolean,
+      showAddClientModal: false as boolean,
       showAddFacilityModal: false as boolean,
       showAddCategoryModal: false as boolean,
       showAddTrainerModal: false as boolean,
-      showUpdateCategoryModal: false as boolean,
+      showAddMemberModal: false as boolean,
       successFunc: null as any,
     }
   },
@@ -100,6 +115,15 @@ export default Vue.extend({
     closeAddClassModal() {
       this.closeModal(this.successFunc)
       this.showAddClassModal = false
+    },
+    addClientModal(refereshTable: any): void {
+      this.modalTitle = 'Add Client'
+      this.successFunc = refereshTable
+      this.showAddClientModal = true
+    },
+    closeAddClientModal() {
+      this.closeModal(this.successFunc)
+      this.showAddClientModal = false
     },
     addFacilityModal(refereshTable: any): void {
       this.modalTitle = 'Add Facility'
@@ -128,15 +152,14 @@ export default Vue.extend({
       this.closeModal(this.successFunc)
       this.showAddTrainerModal = false
     },
-    updateCategoryModal(refereshTable: any, id: string): void {
-      this.categoryId = id
-      this.modalTitle = 'Update Category'
+    addMemberModal(refereshTable: any): void {
+      this.modalTitle = 'Add Member'
       this.successFunc = refereshTable
-      this.showUpdateCategoryModal = true
+      this.showAddMemberModal = true
     },
-    closeUpdateCategoryModal() {
+    closeAddMemberModal() {
       this.closeModal(this.successFunc)
-      this.showUpdateCategoryModal = false
+      this.showAddMemberModal = false
     },
     closeModal(done: any) {
       done()

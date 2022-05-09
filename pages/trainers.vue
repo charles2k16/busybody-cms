@@ -1,7 +1,7 @@
 <template>
   <div>
     <ModalHandler ref="handleAction" />
-
+    <UpdateModalHandler ref="updateAction" />
     <DeleteModal
       ref="deleteAction"
       @confirmDelete="deleteTrainer"
@@ -64,7 +64,12 @@
               content="Edit Trainer"
               placement="top"
             >
-              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-edit"
+                circle
+                @click="updateTrainer(props.row)"
+              ></el-button>
             </el-tooltip>
             <el-button
               type="danger"
@@ -94,9 +99,13 @@
 import Vue from 'vue'
 import { IUser } from '@/types'
 import { IMixinState } from '@/types/mixinsTypes'
+import UpdateModalHandler from '@/handlers/UpdateModalHandler.vue'
 
 export default Vue.extend({
   name: 'Trainers',
+  components: {
+    UpdateModalHandler,
+  },
   data() {
     return {
       search: '' as string,
@@ -133,6 +142,9 @@ export default Vue.extend({
       })
       this.trainersData = tableData
       this.tableLoading = false
+    },
+    updateTrainer(trainer: object) {
+      ;(this as any).$refs.updateAction.updateTrainerModal(this.$fetch, trainer)
     },
     deleteTrainerModal(trainerId: string): void {
       console.log(trainerId)

@@ -3,16 +3,16 @@
     <!-- add new enquiry dialog -->
     <el-form
       ref="facilityDetails"
-      v-model="facilityDetails"
+      v-model="details"
       class="facility"
       label-position="top"
     >
-      <el-form-item label="Facility name">
-        <el-input v-model="facilityDetails.name" placeholder="name"> </el-input>
+      <el-form-item label="Category name">
+        <el-input v-model="details.name" placeholder="name"> </el-input>
       </el-form-item>
-      <el-form-item label="Facility description">
+      <el-form-item label="Category description">
         <el-input
-          v-model="facilityDetails.description"
+          v-model="details.description"
           type="textarea"
           rows="3"
           placeholder="description"
@@ -20,11 +20,7 @@
         </el-input>
       </el-form-item>
       <el-form-item class="facility_submit">
-        <el-button
-          type="primary"
-          :loading="loading"
-          :disabled="!isValid"
-          @click="submitFacility"
+        <el-button type="primary" :loading="loading" @click="submitFacility"
           >Submit</el-button
         >
       </el-form-item>
@@ -36,34 +32,37 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'AddFacilityModal',
+  name: 'UpdateFacility',
+  props: {
+    facility: {
+      type: Object,
+      required: true,
+      default: () => {
+        return {}
+      },
+    },
+  },
   data() {
     return {
       loading: false,
-      facilityDetails: {
-        name: '' as string,
-        description: '' as string,
+      details: {
+        name: this.facility.name as string,
+        description: this.facility.description as string,
       },
+      facility_id: this.facility._id,
     }
   },
-  computed: {
-    isValid(): boolean {
-      return (
-        this.facilityDetails.name !== '' &&
-        this.facilityDetails.description !== ''
-      )
-    },
-  },
+
   methods: {
     submitFacility(): void {
       this.loading = true
-      this.$emit('closeClassModal')
+      this.$emit('closeFacilityModal')
       this.$facilitiesApi
-        .create(this.facilityDetails)
+        .update(this.facility_id, this.details)
         .then((res) => {
           console.log(res)
           this.loading = false
-          this.$message.success('Category Created Successfully!')
+          this.$message.success('Facility Updated Successfully!')
         })
         .catch((err) => {
           if (err?.data) {

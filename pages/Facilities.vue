@@ -1,7 +1,7 @@
 <template>
   <div>
     <ModalHandler ref="handleAction" />
-
+    <UpdateModalHandler ref="updateAction" />
     <DeleteModal
       ref="deleteAction"
       @confirmDelete="deleteFacility"
@@ -54,7 +54,12 @@
               content="Edit Facility"
               placement="top"
             >
-              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-edit"
+                circle
+                @click="updateFacilityModal(props.row)"
+              ></el-button>
             </el-tooltip>
             <el-button
               type="danger"
@@ -82,9 +87,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import UpdateModalHandler from '@/handlers/UpdateModalHandler.vue'
 
 export default Vue.extend({
   name: 'Clients',
+  components: {
+    UpdateModalHandler,
+  },
   data() {
     return {
       search: '' as string,
@@ -105,9 +114,14 @@ export default Vue.extend({
   },
   methods: {
     deleteFacilityModal(id: string) {
-      console.log(id)
       this.facilityId = id
       ;(this as any).$refs.deleteAction.open()
+    },
+    updateFacilityModal(facility: object) {
+      ;(this as any).$refs.updateAction.updateFacilityModal(
+        this.$fetch,
+        facility
+      )
     },
     deleteFacility() {
       this.$facilitiesApi.delete(this.facilityId).then(() => this.$fetch())

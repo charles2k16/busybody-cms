@@ -36,13 +36,23 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'UpdateCategorysModal',
+  name: 'UpdateCategoryModal',
+  props: {
+    category: {
+      type: Object,
+      required: true,
+      default: () => {
+        return {}
+      },
+    },
+  },
   data() {
     return {
       loading: false,
       categoryDetails: {
-        name: '' as string,
-        slug: '' as string,
+        id: this.category.id,
+        name: this.category.name,
+        slug: this.category.slug,
       },
     }
   },
@@ -56,21 +66,27 @@ export default Vue.extend({
   methods: {
     submitCategory(): void {
       this.loading = true
-      //    this.$categoriesApi
-      //         .update("", this.categoryDetails)
-      //         .then((res) => {
-      //           console.log(res)
-      //           this.$message.success('Category Updated Successfully!')
-      //           this.$fetch()
-      //         })
-      //         .catch((err) => {
-      //           if (err?.data) {
-      //             this.$message.error('An Error Occured!')
-      //           }
+      console.log(this.categoryDetails)
 
-      //           console.log(err)
-      //         })
-      this.$emit('closeClassModal')
+      this.$categoriesApi
+        .update(this.categoryDetails.id, {
+          name: this.categoryDetails.name,
+          slug: this.categoryDetails.slug,
+        })
+        .then((res) => {
+          console.log(res)
+          this.$emit('closeCategoryModal')
+          this.loading = false
+          this.$message.success('Category Updated Successfully!')
+        })
+        .catch((err) => {
+          if (err?.data) {
+            this.loading = false
+            this.$message.error('An Error Occured!')
+          }
+
+          console.log(err)
+        })
     },
   },
 })
