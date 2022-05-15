@@ -30,11 +30,18 @@ export default Vue.extend( {
       return `${ day }-${ month }-${ year }`;
     },
     getNotification ( message: string, type: string ) {
-      this.$message( {
-        showClose: true,
+      this.$notify( {
+        title:
+          type === 'success'
+            ? 'Success'
+            : type === 'error'
+              ? 'Error'
+              : type === 'warning'
+                ? 'Warning'
+                : 'Info',
         message,
-        type
-      } );
-    }
+        type,
+      } )
+    },
   }
 } );

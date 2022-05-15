@@ -58,6 +58,7 @@ small {
 }
 h2 {
   font-size: 1.3rem;
+  color: #171719;
 }
 h3 {
   font-size: 1.1rem;
@@ -80,6 +81,9 @@ footer p {
 }
 .text-primary {
   color: var(--color-primary);
+}
+.clickable {
+  cursor: pointer;
 }
 
 /* margin-top */

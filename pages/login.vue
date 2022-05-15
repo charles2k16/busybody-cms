@@ -29,14 +29,16 @@
             </el-form-item>
           </el-form>
 
-          <div class="d-flex_justify_between mt-30">
-            <el-checkbox v-model="remember">Remember Me</el-checkbox>
-
-            <span>Forget Password</span>
-          </div>
+          <!-- <div class="d-flex_justify_between mt-30">
+            <span class="clickable">Forget Password</span>
+          </div> -->
 
           <div class="mt-40">
-            <el-button class="full_width" type="primary" @click="userLogin"
+            <el-button
+              class="full_width"
+              type="primary"
+              :loading="loading"
+              @click="userLogin"
               >Login</el-button
             >
           </div>
@@ -48,7 +50,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-// import { IErrorObject } from '@/types'
 import { IMixinState } from '@/types/mixinsTypes'
 
 export default Vue.extend({
@@ -56,6 +57,7 @@ export default Vue.extend({
   layout: 'auth',
   data() {
     return {
+      loading: false,
       loginForm: {
         email: '' as string,
         password: '' as string,
@@ -65,14 +67,16 @@ export default Vue.extend({
   },
   methods: {
     async userLogin(): Promise<any> {
+      this.loading = true
       try {
         await this.$auth.loginWith('local', {
           data: this.loginForm,
         })
+        this.loading = false
       } catch (error: any) {
         const err = Object.assign({}, error)
         const message = err.response.data.error
-
+        this.loading = false
         ;(this as any as IMixinState).getNotification(message, 'error')
       }
     },
@@ -92,7 +96,7 @@ export default Vue.extend({
   background-size: cover;
 
   .box-card {
-    max-width: 550px;
+    max-width: 500px;
     width: 100%;
 
     .login_title {

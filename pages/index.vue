@@ -1,23 +1,28 @@
 <template>
   <div>
     <el-row :gutter="12">
-      <el-col :md="8" :sm="12">
-        <el-card shadow="always" class="cards"
-          ><div>
-            <div class="card_content">
-              <section>
-                <FontAwesomeIcon icon="fa-solid fa-users" class="fontUsers" />
-              </section>
-              <h3 class="card_text">Active Users</h3>
-            </div>
+      <h3>Welcome Brian !</h3>
+
+      <el-col :md="6" :sm="12">
+        <div>
+          <h4>Bookings</h4>
+
+          <div>
             <div>
-              <!-- content -->
+              <i class="el-icon-caret-top"></i>
+              <h2>234</h2>
             </div>
+
+            <el-progress
+              type="dashboard"
+              :percentage="percentage"
+              :color="colors"
+            ></el-progress>
           </div>
-        </el-card>
+        </div>
       </el-col>
 
-      <el-col :md="8" :sm="12">
+      <el-col :md="6" :sm="12">
         <el-card shadow="always" class="cards">
           <div>
             <div style="display: flex">
@@ -33,7 +38,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :md="8" :sm="12">
+      <el-col :md="6" :sm="12">
         <el-card shadow="always" class="cards">
           <div>
             <div style="display: flex">
@@ -80,66 +85,14 @@ export default {
   },
   data() {
     return {
-      // data: {
-      //   labels: [
-      //     '2019-06',
-      //     '2019-07',
-      //     '2019-08',
-      //     '2019-09',
-      //     '2019-10',
-      //     '2019-11',
-      //     '2019-12',
-      //     '2020-01',
-      //     '2020-02',
-      //     '2020-03',
-      //   ],
-      //   datasets: [
-      //     {
-      //       label: 'Visualizaciones',
-      //       data: [2, 1, 16, 3, 4, 5, 0, 0, 4, 12, 2],
-      //       backgroundColor: 'rgba(20, 255, 0, 0.3)',
-      //       borderColor: 'rgba(100, 255, 0, 1)',
-      //       borderWidth: 2,
-      //     },
-      //   ],
-      // },
-      // barChartOptions: {
-      //   responsive: true,
-      //   legend: {
-      //     display: false,
-      //   },
-      //   title: {
-      //     display: true,
-      //     text: 'Google analytics data',
-      //     fontSize: 24,
-      //     fontColor: '#6b7280',
-      //   },
-      //   tooltips: {
-      //     backgroundColor: '#17BF62',
-      //   },
-      //   scales: {
-      //     xAxes: [
-      //       {
-      //         gridLines: {
-      //           display: true,
-      //         },
-      //       },
-      //     ],
-      //     yAxes: [
-      //       {
-      //         ticks: {
-      //           beginAtZero: true,
-      //           max: 7,
-      //           min: 0,
-      //           stepSize: 1,
-      //         },
-      //         gridLines: {
-      //           display: true,
-      //         },
-      //       },
-      //     ],
-      //   },
-      // },
+      percentage: 10,
+      colors: [
+        { color: '#f56c6c', percentage: 20 },
+        { color: '#e6a23c', percentage: 40 },
+        { color: '#5cb87a', percentage: 60 },
+        { color: '#1989fa', percentage: 80 },
+        { color: '#6f7ad3', percentage: 100 },
+      ],
     }
   },
 }

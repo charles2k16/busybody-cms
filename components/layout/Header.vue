@@ -56,11 +56,16 @@ export default Vue.extend({
   },
   watch: {
     $route(to) {
-      this.pageTitle = to.name
+      this.setRoutesNames(to.name)
     },
   },
   created() {
-    this.pageTitle = this.$route.name!
+    this.setRoutesNames(this.$route.name!)
+  },
+  methods: {
+    setRoutesNames(routeName: string) {
+      this.pageTitle = routeName === 'index' ? 'Dashboard' : routeName
+    },
   },
 })
 </script>

@@ -12,10 +12,6 @@ declare interface classDetail {
   images: Array<string>
   schedules: Array<object>
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> f1f0d0451bbc10f529d925abb28b900a73a43201
 export interface IClassState {
   classDetails: classDetail
   classCategories: Array<object>
