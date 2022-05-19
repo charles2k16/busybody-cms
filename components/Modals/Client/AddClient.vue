@@ -51,9 +51,7 @@
         </el-input>
       </el-form-item> -->
       <el-form-item class="input_spacing facility_submit">
-        <el-button type="primary" :disabled="!isValid" @click="submitClient"
-          >Submit</el-button
-        >
+        <el-button type="primary" @click="submitClient">Submit</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -78,22 +76,6 @@ export default Vue.extend({
       roles: [],
     }
   },
-  async fetch() {
-    const roles = await this.$rolesApi.userTypes()
-    console.log(roles)
-    this.roles = roles.data
-  },
-  computed: {
-    isValid(): boolean {
-      return (
-        this.details.first_name !== '' &&
-        this.details.last_name !== '' &&
-        this.details.password !== '' &&
-        this.details.email !== '' &&
-        this.details.phone !== ''
-      )
-    },
-  },
   methods: {
     submitClient(): void {
       this.$userApi
@@ -101,7 +83,7 @@ export default Vue.extend({
         .then((res) => {
           console.log(res)
           this.$emit('closeClientModal')
-          this.loading = false
+
           this.$message.success('Client Created Successfully!')
         })
         .catch((err) => {

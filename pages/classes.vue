@@ -190,16 +190,16 @@ export default Vue.extend({
 
   data() {
     return {
-      search: '' as string,
+      search: '',
       classesData: [] as Array<object>,
-      tableLoading: true as boolean,
-      showFilter: false as boolean,
-      classId: '' as string,
+      tableLoading: true,
+      showFilter: false,
+      classId: '',
       queryParams: {
-        location: '' as string,
-        trainer: '' as string,
-        capacity: Number,
-        promotion: 0 as number,
+        location: '',
+        trainer: '',
+        capacity: 0,
+        promotion: 0,
       },
     }
   },
@@ -224,7 +224,7 @@ export default Vue.extend({
     addClass(): void {
       ;(this as any).$refs.handleAction.addClassModal(this.$fetch)
     },
-    updateClassModal(classDetails: Array): void {
+    updateClassModal(classDetails: any): void {
       ;(this as any).$refs.updateAction.updateClassModal(
         this.$fetch,
         classDetails

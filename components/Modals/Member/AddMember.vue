@@ -31,9 +31,7 @@
         </el-form-item>
       </el-form-item>
       <el-form-item class="input_spacing facility_submit">
-        <el-button type="primary" :disabled="!isValid" @click="submitMembership"
-          >Submit</el-button
-        >
+        <el-button type="primary" @click="submitMembership">Submit</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -41,12 +39,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { memberDetails } from '@/types/modals/addModals'
 
 export default Vue.extend({
   name: 'AddTrainer',
 
-  data(): memberDetails {
+  data() {
     return {
       modalTitle: '' as string,
       showTrainerModal: false as boolean,
@@ -59,30 +56,19 @@ export default Vue.extend({
       },
     }
   },
-  computed: {
-    isValid(): boolean {
-      return (
-        this.details.creditName !== '' &&
-        this.details.totalCredits !== 0 &&
-        this.details.description !== '' &&
-        this.details.price !== 0 &&
-        this.details.period !== ''
-      )
-    },
-  },
   methods: {
     submitMembership(): void {
       this.$emit('facility', this.details)
       this.$emit('closeClassModal')
       this.$categoriesApi
         .create(this.details)
-        .then((res) => {
+        .then((res: any) => {
           console.log(res)
-          this.loading = false
+
           this.$message.success('Member Created Successfully!')
           this.$fetch()
         })
-        .catch((err) => {
+        .catch((err: any) => {
           if (err?.data) {
             this.$message.error('An Error Occured!')
           }

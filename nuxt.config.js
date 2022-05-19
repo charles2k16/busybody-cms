@@ -22,14 +22,12 @@ export default {
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/css/global.css',
     '~/assets/css/element_ui.scss',
-    '@fortawesome/fontawesome-svg-core/styles.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/elementUI/element-ui',
     '@/plugins/api.js',
-    '~/plugins/fontawesome.js',
     { src: '~/plugins/chart.js', mode: 'client' },
   ],
 

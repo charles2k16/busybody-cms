@@ -40,12 +40,7 @@
               content="Add roles"
               placement="top"
             >
-              <el-button
-                type="primary"
-                icon="el-icon-plus"
-                circle
-                @click="addCategory"
-              ></el-button>
+              <el-button type="primary" icon="el-icon-plus" circle></el-button>
             </el-tooltip>
           </el-col>
         </el-row>
@@ -110,28 +105,7 @@ export default Vue.extend({
       },
     }
   },
-  async fetch() {
-    const roles = await this.$rolesApi.userTypes()
-    console.log(roles)
-    this.roles = roles.data
-  },
-  computed: {
-    isValid(): boolean {
-      return (
-        this.trainerDetails.first_name !== '' &&
-        this.trainerDetails.last_name !== '' &&
-        this.trainerDetails.password !== '' &&
-        this.confirm_password !== '' &&
-        this.trainerDetails.email !== '' &&
-        this.trainerDetails.phone !== ''
-      )
-    },
-  },
   methods: {
-    addCategory() {
-      const namew = (this as any as IMixinState).getFullName('ghss', 'errdd')
-      console.log(namew)
-    },
     submitTrainer(): void {
       if (this.confirm_pass !== this.trainerDetails.password) {
         this.notMatch = 'Your password does not match'

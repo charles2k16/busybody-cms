@@ -200,7 +200,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { IClassState } from '@/types'
 import { IMixinState } from '@/types/mixinsTypes'
 
 export default Vue.extend({
@@ -214,7 +213,7 @@ export default Vue.extend({
       },
     },
   },
-  data(): IClassState {
+  data() {
     return {
       classDetails: {
         name: this.classupdate.name,
