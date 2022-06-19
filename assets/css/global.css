@@ -151,7 +151,6 @@ footer p {
 .pt-10 {
   padding-top: 10px;
 }
-
 .center {
   text-align: center;
 }
@@ -189,6 +188,13 @@ footer p {
 }
 .search_input_width.el-input {
   width: 80% !important;
+}
+.section_dashboard {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1350px;
+  width: 100%;
+  height: auto;
 }
 /* .category_circles {
   height: 25px;

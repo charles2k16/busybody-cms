@@ -1,4 +1,5 @@
 export interface IMixinState {
+  todaysDAteInText (): string;
   getFullName: ( firstName: string, lastName: string ) => string,
   getFormatedDate: ( currentDate: string, type: string ) => string,
   getNotification: ( message: string, type: string ) => void

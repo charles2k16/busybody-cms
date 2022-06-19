@@ -8,7 +8,9 @@
       </el-header>
 
       <el-main>
-        <Nuxt />
+        <div class="section_dashboard">
+          <Nuxt />
+        </div>
       </el-main>
       <footer class="d-flex_justify_between">
         <p>BusyBody Fitness Center © 2022. All right reserved.</p>

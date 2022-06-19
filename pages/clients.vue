@@ -1,7 +1,7 @@
 <template>
   <div>
     <ModalHandler ref="handleAction" />
-    <UpdateModalHandler ref="updateAction" />
+    <UpdateModalHandler ref="updateAction"></UpdateModalHandler>
     <DeleteModal
       ref="deleteAction"
       @confirmDelete="deleteClientModal"

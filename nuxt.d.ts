@@ -8,7 +8,7 @@ declare module 'vue/types/options' {
     Computed = DefaultComputed,
     PropsDef = PropsDefinition<DefaultProps>,
     Props = DefaultProps
-  > {
+    > {
     head?: object | Function
     layout?: string | Function
     middleware?: string | string[] | object
@@ -20,10 +20,10 @@ declare module 'vue/types/options' {
 
 interface apiService {
   index: Function
-  create: (params: object) => Promise<any>
-  delete: (params: string) => Promise<any>
-  update: (id: string, payload: any) => Promise<any>
-  userTypes: (path: string, params: object) => Promise<any>
+  create: ( params: object ) => Promise<any>
+  delete: ( params: string ) => Promise<any>
+  update: ( id: string, payload: any ) => Promise<any>
+  userTypes: ( path: string, params: object ) => Promise<any>
   //  (query: object): Promise<any>
 }
 

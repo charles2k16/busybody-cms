@@ -7,6 +7,9 @@ export default Vue.extend( {
     ModalHandler,
   },
   methods: <IMixinState> {
+    todaysDAteInText () {
+      return new Date().toDateString();
+    },
     getFullName ( firstName: string, lastName: string ): string {
       return `${ firstName } ${ lastName }`;
     },

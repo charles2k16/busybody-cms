@@ -18,22 +18,11 @@ export default {
   data() {
     return {
       data: {
-        labels: [
-          '2019-06',
-          '2019-07',
-          '2019-08',
-          '2019-09',
-          '2019-10',
-          '2019-11',
-          '2019-12',
-          '2020-01',
-          '2020-02',
-          '2020-03',
-        ],
+        labels: ['2019-06', '2019-07', '2019-08', '2019-09'],
         datasets: [
           {
             label: 'Visualizations',
-            data: [2, 1, 16, 3, 4, 5, 0, 0, 4, 12, 2],
+            data: [2, 1, 16, 3],
             backgroundColor: 'rgba(20, 255, 0, 0.3)',
             borderColor: 'rgba(100, 255, 0, 1)',
             borderWidth: 2,
