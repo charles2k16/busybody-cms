@@ -20,10 +20,10 @@
         >
 
         <!-- <el-menu-item index="3">Memberships</el-menu-item> -->
-        <el-menu-item index="3">
+        <!-- <el-menu-item index="3">
           <i class="el-icon-document-copy"></i>
           Report</el-menu-item
-        >
+        > -->
 
         <el-submenu index="4">
           <template slot="title">
