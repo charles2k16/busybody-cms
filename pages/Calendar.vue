@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div>
+      <el-alert
+        title="To get tailored analysis, click on a card to get full data information"
+        type="info"
+        effect="dark"
+        show-icon
+      >
+      </el-alert>
+
+      <el-button> Add Event </el-button>
+    </div>
     <el-row :gutter="0">
       <el-col :md="7">
         <el-card class="calendar-card">
