@@ -27,43 +27,13 @@
       <el-table v-loading="tableLoading" :data="membershipsData" stripe>
         <el-table-column label="Name">
           <template #default="props">
-            <div class="d-flex">
-              <el-avatar
-                size="medium"
-                src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-              ></el-avatar>
-              <div class="text-primary ml-10">
-                <span>{{ props.row.name }}</span> <br />
-                <small>{{ props.row.email }}</small> <br />
-                <small>{{ props.row.phone }}</small>
-              </div>
-            </div>
+            <span>{{ props.row.membership_name }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column label="Membership"> </el-table-column>
-        <el-table-column label="Bookings"> </el-table-column>
-        <el-table-column label="Credits"> </el-table-column>
-        <!-- <el-table-column label="Last Active">
-          <template #default="props">
-            <span>{{ props.row.lastActive }}</span>
-          </template>
-        </el-table-column> -->
-
-        <el-table-column>
-          <template #default="">
-            <el-button type="primary">View Profile</el-button>
-            <el-tooltip
-              class="item"
-              effect="dark"
-              content="Edit Trainer"
-              placement="top"
-            >
-              <el-button type="primary" icon="el-icon-edit" circle></el-button>
-            </el-tooltip>
-            <el-button type="danger" icon="el-icon-delete" circle></el-button>
-          </template>
+        <el-table-column label="Description" prop="description">
         </el-table-column>
+        <el-table-column label="Type" prop="type"> </el-table-column>
       </el-table>
     </el-card>
 
@@ -100,11 +70,9 @@ export default Vue.extend({
   },
   async fetch() {
     try {
-      const clients = await this.$rolesApi.userTypes(
-        'clients',
-        this.queryParams
-      )
-      this.loadDataTable(clients.data)
+      const memberships = await this.$membershipsApi.index()
+      this.membershipsData = memberships.data
+      this.tableLoading = false
     } catch (err) {
       console.log(err)
     }

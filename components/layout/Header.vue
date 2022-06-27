@@ -64,7 +64,12 @@ export default Vue.extend({
   },
   methods: {
     setRoutesNames(routeName: string) {
-      this.pageTitle = routeName === 'index' ? 'Dashboard' : routeName
+      this.pageTitle =
+        routeName === 'index'
+          ? 'Dashboard'
+          : routeName === 'trainings'
+          ? 'Classes'
+          : routeName
     },
   },
 })

@@ -144,6 +144,10 @@
                 <el-select v-model="classDetails.level" class="full_width">
                   <el-option label="All levels" value="all levels"></el-option>
                   <el-option label="Beginner" value="beginner"></el-option>
+                  <el-option
+                    label="Intermediate"
+                    value="intermediate"
+                  ></el-option>
                   <el-option label="Advanced" value="advanced"></el-option>
                 </el-select>
               </el-form-item>
@@ -169,13 +173,40 @@
             </el-col>
           </el-row>
 
+          <el-row :gutter="30">
+            <el-col :md="12" :xs="24" :sm="24">
+              <el-form-item
+                v-if="classDetails.classType == 'Online'"
+                label="Online URL"
+              >
+                <el-input
+                  v-model="classDetails.onlineUrl"
+                  type="text"
+                  placeholder="youtube, zoom link, google meet"
+                ></el-input>
+              </el-form-item>
+            </el-col>
+
+            <el-col :md="10" :xs="20" :sm="20">
+              <el-form-item
+                v-if="classDetails.singlePrice"
+                label="Single Price"
+              >
+                <el-input v-model="classDetails.price" type="number"></el-input>
+                <p>
+                  Clients ad drop in in clients ca attend for the price entered
+                </p>
+              </el-form-item>
+            </el-col>
+          </el-row>
+
           <!-- class images -->
-          <el-row :gutter="10" class="mt-20">
+          <!-- <el-row :gutter="10" class="mt-20">
             <el-col :md="24" :xs="24" :sm="24">
               <label class="mb-10 d-block">Class Images</label>
               <ImageUpload />
             </el-col>
-          </el-row>
+          </el-row> -->
         </el-tab-pane>
 
         <!-- Schedule Info -->
@@ -211,6 +242,8 @@ export default Vue.extend({
         level: '',
         classType: '',
         singlePrice: false,
+        price: 0,
+        onlineUrl: '',
         category: [],
         facility: '',
         trainers: [],

@@ -31,7 +31,7 @@
             Manage</template
           >
           <el-menu-item-group>
-            <el-menu-item index="4-1" :route="{ path: '/classes' }"
+            <el-menu-item index="4-1" :route="{ path: '/trainings' }"
               >Classes</el-menu-item
             >
             <el-menu-item index="4-2" :route="{ path: '/categories' }"

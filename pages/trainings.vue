@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ModalHandler ref="handleAction"></ModalHandler>
-    <UpdateModalHandler ref="updateAction"></UpdateModalHandler>
-    <DeleteModal ref="deleteAction" @confirmDelete="deleteClass" />
+    <ModalHandler ref="modalAction"></ModalHandler>
+    <!-- <UpdateModalHandler ref="updateAction"></UpdateModalHandler>
+    <DeleteModal ref="deleteAction" @confirmDelete="deleteClass" /> -->
 
     <el-row :gutter="10" class="mb-2 mt-20">
       <el-col :sm="21" :md="21">
@@ -13,11 +13,11 @@
             class="search_input_width"
           >
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
-            <el-button
+            <!-- <el-button
               slot="append"
               icon="el-icon-arrow-down"
               @click="showFilter = !showFilter"
-            ></el-button>
+            ></el-button> -->
           </el-input>
         </div>
 
@@ -128,6 +128,11 @@
             </el-tag>
           </template>
         </el-table-column>
+        <el-table-column label="Location">
+          <template slot-scope="props">
+            <span>{{ props.row.location }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="Schedule">
           <template slot-scope="props">
             <el-button
@@ -180,17 +185,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import UpdateModalHandler from '@/handlers/UpdateModalHandler.vue'
+// import UpdateModalHandler from '@/handlers/UpdateModalHandler.vue'
 
 export default Vue.extend({
   name: 'Classes',
-  components: {
-    UpdateModalHandler,
-  },
+  // components: {
+  //   UpdateModalHandler,
+  // },
 
   data() {
     return {
-      search: '',
+      search: '' as string,
       classesData: [] as Array<object>,
       tableLoading: true,
       showFilter: false,
@@ -204,10 +209,10 @@ export default Vue.extend({
     }
   },
   async fetch() {
+    this.tableLoading = true
     try {
       const classes = await this.$classApi.index()
       this.classesData = classes.data
-      console.log(classes)
       this.tableLoading = false
     } catch (err) {
       console.log(err)
@@ -222,7 +227,7 @@ export default Vue.extend({
       ;(this as any).$refs.deleteAction.open()
     },
     addClass(): void {
-      ;(this as any).$refs.handleAction.addClassModal(this.$fetch)
+      ;(this as any).$refs.modalAction.addClassModal(this.$fetch)
     },
     updateClassModal(classDetails: any): void {
       ;(this as any).$refs.updateAction.updateClassModal(

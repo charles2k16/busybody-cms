@@ -6,6 +6,8 @@ declare interface classDetail {
   level: string
   classType: string
   singlePrice: boolean
+  price: number
+  onlineUrl: string
   category: Array<string>
   facility: string
   trainers: Array<string>

@@ -34,6 +34,7 @@ declare module 'vue/types/vue' {
     $facilitiesApi: apiService
     $rolesApi: apiService
     $userApi: apiService
+    $membershipsApi: apiService
     // $refs: { [key: string]: Vue | Element | (Vue | Element)[] | Function | undefined; }
   }
 }
