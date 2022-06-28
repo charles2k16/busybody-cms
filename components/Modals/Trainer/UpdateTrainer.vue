@@ -83,15 +83,6 @@ export default Vue.extend({
       trainer_id: this.trainer.id,
     }
   },
-  computed: {
-    isValid(): boolean {
-      return (
-        this.trainerDetails.first_name !== '' &&
-        this.trainerDetails.last_name !== '' &&
-        this.trainerDetails.phone !== ''
-      )
-    },
-  },
   methods: {
     submitTrainer(): void {
       // if (this.confirm_pass !== this.trainerDetails.password) {

@@ -58,7 +58,7 @@ small {
 }
 h2 {
   font-size: 1.3rem;
-  color: #171719;
+  color: #0e0e0f;
 }
 h3 {
   font-size: 1.1rem;
@@ -78,6 +78,9 @@ footer p {
 }
 .text-black {
   color: var(--text-base);
+}
+.text-white {
+  color: var(--text-white);
 }
 .text-primary {
   color: var(--color-primary);
@@ -162,6 +165,9 @@ footer p {
 .d-flex {
   display: flex;
   align-items: center;
+}
+.justify-right {
+  justify-content: right;
 }
 .d-flex_justify_between {
   display: flex;

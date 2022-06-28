@@ -8,10 +8,11 @@
         show-icon
       >
       </el-alert>
-
-      <el-button> Add Event </el-button>
+      <div class="d-flex justify-right mt-20">
+        <el-button type="primary" plain> Add New Event </el-button>
+      </div>
     </div>
-    <el-row :gutter="0">
+    <el-row :gutter="0" class="mt-20">
       <el-col :md="7">
         <el-card class="calendar-card">
           <div class="event__incoming">
@@ -51,6 +52,23 @@
             </el-calendar>
           </div>
         </el-card>
+
+        <div class="mt-20">
+          <h3>Facilities</h3>
+
+          <div class="mt-10 locations">
+            <span class="d-block">Causewau Bay</span>
+            <span class="d-block">Shek Mun</span>
+            <span class="d-block">Fo Tan</span>
+          </div>
+        </div>
+        <br />
+        <hr />
+        <div class="mt-20">
+          <h3>Categories</h3>
+
+          <div class="mt-10 locations"></div>
+        </div>
       </el-col>
 
       <el-col :md="17">
@@ -139,6 +157,32 @@
                     <div class="d-flex mt-10">
                       <i class="el-icon-user-solid"></i>
                       <h4>Andre Tan</h4>
+                    </div>
+                  </div>
+                </el-col>
+              </el-row>
+
+              <el-row type="flex" class="event_div__event">
+                <el-col :span="3">
+                  <div class="event_time d-flex_justify_center">
+                    <span>9:45 am</span>
+                  </div>
+                </el-col>
+
+                <el-col :span="21">
+                  <div class="event_div__info">
+                    <div class="d-flex_justify_between">
+                      <h3>SM Yoga therapy - All Levels</h3>
+                      <small>2h 30min</small>
+                    </div>
+                    <div class="d-flex mt-10">
+                      <i class="el-icon-office-building"></i>
+                      <h4>BusyBody Fitness Centre 630SM</h4>
+                    </div>
+
+                    <div class="d-flex mt-10">
+                      <i class="el-icon-user-solid"></i>
+                      <h4>Cammie Yip</h4>
                     </div>
                   </div>
                 </el-col>
@@ -263,6 +307,24 @@ export default Vue.extend({
       margin-right: 10px;
       font-weight: bold;
       font-size: 18px;
+    }
+  }
+}
+
+.locations {
+  span {
+    width: 300px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #703b8d;
+    background: #e6e0f9;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    border-radius: 5px;
+
+    &:hover {
+      color: #fff;
+      background: #703b8d;
     }
   }
 }

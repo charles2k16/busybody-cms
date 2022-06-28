@@ -18,11 +18,11 @@ export default {
   data() {
     return {
       data: {
-        labels: ['2019-06', '2019-07', '2019-08', '2019-09'],
+        labels: [' Causewau Bay', 'Shek Mun', 'Fo Tan'],
         datasets: [
           {
-            label: 'Visualizations',
-            data: [2, 1, 16, 3],
+            label: 'Capacity',
+            data: [5, 20, 16],
             backgroundColor: 'rgba(20, 255, 0, 0.3)',
             borderColor: 'rgba(100, 255, 0, 1)',
             borderWidth: 2,

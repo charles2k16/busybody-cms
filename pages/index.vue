@@ -94,7 +94,7 @@
       </el-col>
 
       <el-col :span="12" class="second_cards">
-        <h3>Finance</h3>
+        <h3>Capacity of classes</h3>
         <BarCharts />
       </el-col>
     </el-row>
