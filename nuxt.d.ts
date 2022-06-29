@@ -19,7 +19,7 @@ declare module 'vue/types/options' {
 }
 
 interface apiService {
-  index: Function
+  get: Function
   create: ( params: object ) => Promise<any>
   delete: ( params: string ) => Promise<any>
   update: ( id: string, payload: any ) => Promise<any>

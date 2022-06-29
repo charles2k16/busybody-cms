@@ -67,7 +67,17 @@
         <div class="mt-20">
           <h3>Categories</h3>
 
-          <div class="mt-10 locations"></div>
+          <div class="mt-10 mr-20">
+            <el-select v-model="category" class="full_width">
+              <el-option
+                v-for="(cat, index) in categories"
+                :key="index"
+                :value="cat.name"
+                ><span class="category_circles">.</span>
+                {{ cat.name }}</el-option
+              >
+            </el-select>
+          </div>
         </div>
       </el-col>
 
@@ -204,7 +214,13 @@ export default Vue.extend({
   data() {
     return {
       selectedDate: '' as object | string,
+      category: '' as string,
+      categories: [],
     }
+  },
+  async fetch() {
+    const response = await this.$categoriesApi.get()
+    this.categories = response.data
   },
   mounted() {
     this.selectedDate = new Date()

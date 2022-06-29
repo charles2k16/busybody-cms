@@ -202,13 +202,10 @@ footer p {
   width: 100%;
   height: auto;
 }
-/* .category_circles {
+.category_circles {
   height: 25px;
   width: 25px;
   background-color: rgb(15, 13, 13);
   border-radius: 50%;
   display: inline-block;
-} */
-/* .cardBorderPrimary {
-  border-top: 8px solid #3353ac !important;
-} */
+}

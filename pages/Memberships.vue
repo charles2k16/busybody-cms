@@ -70,7 +70,7 @@ export default Vue.extend({
   },
   async fetch() {
     try {
-      const memberships = await this.$membershipsApi.index()
+      const memberships = await this.$membershipsApi.get()
       this.membershipsData = memberships.data
       this.tableLoading = false
     } catch (err) {

@@ -211,7 +211,7 @@ export default Vue.extend({
   async fetch() {
     this.tableLoading = true
     try {
-      const classes = await this.$classApi.index()
+      const classes = await this.$classApi.get()
       this.classesData = classes.data
       this.tableLoading = false
     } catch (err) {
