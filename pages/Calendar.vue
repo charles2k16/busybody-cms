@@ -73,7 +73,11 @@
                 v-for="(cat, index) in categories"
                 :key="index"
                 :value="cat.name"
-                ><span class="category_circles">.</span>
+                ><span
+                  class="category_circles"
+                  :style="set_background(cat.color)"
+                  >.</span
+                >
                 {{ cat.name }}</el-option
               >
             </el-select>
@@ -238,6 +242,11 @@ export default Vue.extend({
       console.log(date)
       console.log(selected)
       console.log(this.selectedDate)
+    },
+    set_background(color: string) {
+      return {
+        background: color,
+      }
     },
   },
 })

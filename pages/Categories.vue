@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ModalHandler ref="handleAction" />
+    <ModalHandler ref="modalAction" />
     <UpdateModalHandler ref="updateAction" />
 
     <DeleteModal
@@ -18,7 +18,6 @@
             class="search_input_width"
           >
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
-            <el-button slot="append" icon="el-icon-sort"></el-button>
           </el-input>
         </div>
       </el-col>
@@ -37,17 +36,7 @@
     <el-card class="mt-40">
       <el-table v-loading="tableLoading" :data="categoriesData" stripe>
         <el-table-column prop="name" label="Name" />
-        <el-table-column prop="slug" label="Slug" width="400" />
-        <el-table-column label="Bookable" align="center">
-          <template #default="props">
-            <el-tag
-              :type="props.row.bookable === false ? 'danger' : 'info'"
-              size="small"
-            >
-              <b> {{ props.row.bookable === false ? 'No' : 'Yes' }}</b>
-            </el-tag>
-          </template>
-        </el-table-column>
+        <el-table-column prop="color" label="Color" />
         <el-table-column align="right">
           <template #default="props">
             <el-tooltip
@@ -106,15 +95,15 @@ export default Vue.extend({
     return {
       search: '' as string,
       categoriesData: [] as Array<object>,
-      tableLoading: true as boolean,
+      tableLoading: false as boolean,
       categoryId: '' as string,
     }
   },
   async fetch() {
+    this.tableLoading = true
     try {
-      const categories = await this.$categoriesApi.index()
+      const categories = await this.$categoriesApi.get()
       this.categoriesData = categories.data
-      console.log(categories.data)
       this.tableLoading = false
     } catch (err) {
       console.log(err)
@@ -129,7 +118,7 @@ export default Vue.extend({
       this.$categoriesApi.delete(this.categoryId).then(() => this.$fetch())
     },
     showCategoryModal(): void {
-      ;(this as any).$refs.handleAction.addCategoryModal(this.$fetch)
+      ;(this as any).$refs.modalAction.addCategoryModal(this.$fetch)
     },
     showUpdateCategoryModal(id: string, name: string, slug: string): void {
       ;(this as any).$refs.updateAction.updateCategoryModal(this.$fetch, {

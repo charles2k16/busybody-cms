@@ -28,7 +28,7 @@
                 <span> Account </span>
               </li>
               <hr class="hr_rule" />
-              <li class="mt-5">
+              <li class="mt-5" @click="logout">
                 <i class="el-icon-setting"></i>
                 <span> Logout </span>
               </li>
@@ -70,6 +70,12 @@ export default Vue.extend({
           : routeName === 'trainings'
           ? 'Classes'
           : routeName
+    },
+    async logout() {
+      await this.$auth.logout()
+      this.$router.push({
+        name: 'login',
+      })
     },
   },
 })

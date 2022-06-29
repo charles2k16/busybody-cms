@@ -31,15 +31,12 @@
     </el-dialog>
     <el-dialog
       :visible.sync="showAddCategoryModal"
-      width="40%"
+      width="25%"
       :destroy-on-close="true"
       custom-class="mobile-modal"
     >
       <template slot="title">
         <h3>{{ modalTitle }}</h3>
-        <p class="mt-10">
-          All fields should be filled for accurate category filtering.
-        </p>
       </template>
       <AddCategory @closeAddCategoryModal="closeAddCategoryModal" />
     </el-dialog>

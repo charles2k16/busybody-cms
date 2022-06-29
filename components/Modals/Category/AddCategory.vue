@@ -10,19 +10,24 @@
       <el-form-item label="Category name">
         <el-input v-model="categoryDetails.name" placeholder="name"> </el-input>
       </el-form-item>
-      <el-form-item label="Category Slug">
-        <el-input v-model="categoryDetails.slug" placeholder="slug"> </el-input>
-      </el-form-item>
-      <el-form-item class="facility_submit">
-        <el-button
-          type="primary"
-          :loading="loading"
-          :disabled="!isValid"
-          @click="submitFacility"
-          >Submit</el-button
+      <el-form-item label="Category Color">
+        <small>Select color from picker</small>
+        <el-color-picker v-model="categoryDetails.color"></el-color-picker>
+        <el-input
+          v-model="categoryDetails.color"
+          placeholder="color code"
+          readonly
         >
+        </el-input>
       </el-form-item>
     </el-form>
+    <el-button
+      type="primary"
+      :loading="loading"
+      class="full_width"
+      @click="addCategory"
+      >Save Category</el-button
+    >
   </div>
 </template>
 
@@ -36,28 +41,19 @@ export default Vue.extend({
       loading: false,
       categoryDetails: {
         name: '' as string,
-        slug: '' as string,
+        color: '#8B2121' as string,
       },
     }
   },
-  computed: {
-    isValid(): boolean {
-      return (
-        this.categoryDetails.name !== '' && this.categoryDetails.slug !== ''
-      )
-    },
-  },
   methods: {
-    submitFacility(): void {
+    addCategory(): void {
       this.loading = true
-      this.$emit('closeClassModal')
       this.$categoriesApi
         .create(this.categoryDetails)
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           this.loading = false
           this.$message.success('Category Created Successfully!')
-          this.$fetch()
+          this.$emit('closeAddCategoryModal')
         })
         .catch((err) => {
           if (err?.data) {
