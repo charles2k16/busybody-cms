@@ -36,6 +36,15 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'AddFacilityModal',
+  props: {
+    category: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {}
+      },
+    },
+  },
   data() {
     return {
       loading: false,
@@ -45,23 +54,49 @@ export default Vue.extend({
       },
     }
   },
+  created() {
+    // check if there is a property passed in the props
+    if (this.category.id) {
+      this.categoryDetails.id = this.category.id
+      this.categoryDetails.name = this.category.name
+      this.categoryDetails.color = this.category.color
+    }
+  },
   methods: {
     addCategory(): void {
       this.loading = true
-      this.$categoriesApi
-        .create(this.categoryDetails)
-        .then(() => {
-          this.loading = false
-          this.$message.success('Category Created Successfully!')
-          this.$emit('closeAddCategoryModal')
-        })
-        .catch((err) => {
-          if (err?.data) {
-            this.$message.error('An Error Occured!')
-          }
 
-          console.log(err)
-        })
+      if (this.categoryDetails.id) {
+        this.$categoriesApi
+          .update(this.categoryDetails.id, this.categoryDetails)
+          .then(() => {
+            this.loading = false
+            this.$message.success('Category Updated Successfully!')
+            this.$emit('closeCategoryModal')
+          })
+          .catch((err) => {
+            if (err?.data) {
+              this.$message.error('An Error Occured!')
+            }
+
+            console.log(err)
+          })
+      } else {
+        this.$categoriesApi
+          .create(this.categoryDetails)
+          .then(() => {
+            this.loading = false
+            this.$message.success('Category Created Successfully!')
+            this.$emit('closeCategoryModal')
+          })
+          .catch((err) => {
+            if (err?.data) {
+              this.$message.error('An Error Occured!')
+            }
+
+            console.log(err)
+          })
+      }
     },
   },
 })

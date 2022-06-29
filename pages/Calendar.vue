@@ -246,6 +246,7 @@ export default Vue.extend({
     set_background(color: string) {
       return {
         background: color,
+        color,
       }
     },
   },

@@ -38,7 +38,10 @@
       <template slot="title">
         <h3>{{ modalTitle }}</h3>
       </template>
-      <AddCategory @closeAddCategoryModal="closeAddCategoryModal" />
+      <AddCategory
+        :category="category"
+        @closeCategoryModal="closeAddCategoryModal"
+      />
     </el-dialog>
     <el-dialog
       :visible.sync="showAddTrainerModal"
@@ -101,6 +104,7 @@ export default Vue.extend({
       showAddTrainerModal: false as boolean,
       showAddMemberModal: false as boolean,
       successFunc: null as any,
+      category: {} as any,
     }
   },
   methods: {
@@ -136,9 +140,16 @@ export default Vue.extend({
       this.successFunc = refereshTable
       this.showAddCategoryModal = true
     },
+    updateCategoryModal(refereshTable: any, category: object): void {
+      this.modalTitle = 'Update Category'
+      this.category = category
+      this.successFunc = refereshTable
+      this.showAddCategoryModal = true
+    },
     closeAddCategoryModal() {
       this.closeModal(this.successFunc)
       this.showAddCategoryModal = false
+      this.category = {}
     },
     addTrainerModal(refereshTable: any): void {
       this.modalTitle = 'Add Trainer'

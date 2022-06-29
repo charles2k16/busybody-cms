@@ -49,13 +49,7 @@
                 type="primary"
                 icon="el-icon-edit"
                 circle
-                @click="
-                  showUpdateCategoryModal(
-                    props.row._id,
-                    props.row.name,
-                    props.row.slug
-                  )
-                "
+                @click="showUpdateCategory(props.row)"
               ></el-button>
             </el-tooltip>
             <el-button
@@ -120,12 +114,11 @@ export default Vue.extend({
     showCategoryModal(): void {
       ;(this as any).$refs.modalAction.addCategoryModal(this.$fetch)
     },
-    showUpdateCategoryModal(id: string, name: string, slug: string): void {
-      ;(this as any).$refs.updateAction.updateCategoryModal(this.$fetch, {
-        id,
-        name,
-        slug,
-      })
+    showUpdateCategory(category: object): void {
+      ;(this as any).$refs.modalAction.updateCategoryModal(
+        this.$fetch,
+        category
+      )
     },
   },
 })
