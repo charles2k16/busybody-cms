@@ -104,7 +104,7 @@ export default Vue.extend({
   },
   async fetch() {
     try {
-      const facilities = await this.$facilitiesApi.index()
+      const facilities = await this.$facilitiesApi.get()
       this.facilitiesData = facilities.data
       console.log(facilities)
       this.tableLoading = false
