@@ -120,7 +120,7 @@ export default Vue.extend({
   },
   async fetch() {
     try {
-      const clients = await this.$rolesApi.index('/clients', this.queryParams)
+      const clients = await this.$rolesApi.get('/clients', this.queryParams)
       this.loadDataTable(clients.data)
     } catch (err) {
       console.log(err)
