@@ -53,11 +53,13 @@ export default Vue.extend({
         name: '' as string,
         color: '#8B2121' as string,
       },
+      isEdit: false,
     }
   },
   created() {
     // check if there is a property passed in the props
     if (this.category.id) {
+      this.isEdit = true
       this.categoryDetails.id = this.category.id
       this.categoryDetails.name = this.category.name
       this.categoryDetails.color = this.category.color
@@ -67,7 +69,7 @@ export default Vue.extend({
     addCategory(): void {
       this.loading = true
 
-      if (this.categoryDetails.id) {
+      if (this.isEdit) {
         this.$categoriesApi
           .update(this.categoryDetails.id, this.categoryDetails)
           .then(() => {
@@ -83,8 +85,13 @@ export default Vue.extend({
             console.log(err)
           })
       } else {
+        const category = {
+          name: this.categoryDetails.name,
+          color: this.categoryDetails.color,
+        }
+
         this.$categoriesApi
-          .create(this.categoryDetails)
+          .create(category)
           .then(() => {
             this.loading = false
             this.$message.success('Category Created Successfully!')
