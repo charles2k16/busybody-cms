@@ -242,8 +242,8 @@ export default Vue.extend({
   },
 
   async fetch() {
-    const categories = await this.$categoriesApi.index()
-    const facilities = await this.$facilitiesApi.index()
+    const categories = await this.$categoriesApi.get()
+    const facilities = await this.$facilitiesApi.get()
     const trainers = await this.$rolesApi.userTypes(
       'trainers',
       this.queryParams
