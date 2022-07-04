@@ -1,8 +1,6 @@
 <template>
   <div>
     <ModalHandler ref="modalAction" />
-    <UpdateModalHandler ref="updateAction" />
-
     <DeleteModal
       ref="deleteAction"
       file="facility"

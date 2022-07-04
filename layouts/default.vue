@@ -14,7 +14,7 @@
       </el-main>
       <footer class="d-flex_justify_between">
         <p>BusyBody Fitness Center © 2022. All right reserved.</p>
-        <p><b>v-1.0.1</b></p>
+        <p><b>v-1.0.2</b></p>
       </footer>
     </el-container>
   </el-container>
