@@ -76,13 +76,9 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import UpdateModalHandler from '@/handlers/UpdateModalHandler.vue'
 
 export default Vue.extend({
   name: 'Clients',
-  components: {
-    UpdateModalHandler,
-  },
   data() {
     return {
       search: '' as string,

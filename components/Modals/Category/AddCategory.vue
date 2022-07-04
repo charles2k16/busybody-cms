@@ -49,6 +49,7 @@ export default Vue.extend({
     return {
       loading: false,
       categoryDetails: {
+        id: '' as string,
         name: '' as string,
         color: '#8B2121' as string,
       },
