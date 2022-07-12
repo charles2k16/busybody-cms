@@ -19,59 +19,100 @@
         >
         </el-input>
       </el-form-item>
-      <el-form-item class="facility_submit">
-        <el-button
-          type="primary"
-          :loading="loading"
-          :disabled="!isValid"
-          @click="submitFacility"
-          >Submit</el-button
-        >
+      <el-form-item label="Bookable" prop="bookable">
+        <el-radio-group v-model="facilityDetails.bookable">
+          <el-radio-button :label="true">Yes</el-radio-button>
+          <el-radio-button :label="false">No</el-radio-button>
+        </el-radio-group>
       </el-form-item>
     </el-form>
+    <el-button
+      class="full_width"
+      type="primary"
+      :loading="loading"
+      @click="submitFacility"
+      >Submit</el-button
+    >
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { IMixinState } from '../../../types/mixinsTypes'
 
 export default Vue.extend({
   name: 'AddFacilityModal',
+  props: {
+    facility: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {}
+      },
+    },
+    isEdit: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
   data() {
     return {
       loading: false,
       facilityDetails: {
+        id: '' as string,
         name: '' as string,
         description: '' as string,
+        bookable: false as boolean,
       },
     }
   },
-  computed: {
-    isValid(): boolean {
-      return (
-        this.facilityDetails.name !== '' &&
-        this.facilityDetails.description !== ''
-      )
-    },
+  created() {
+    if (this.isEdit) {
+      this.facilityDetails.id = this.facility._id
+      this.facilityDetails.name = this.facility.name
+      this.facilityDetails.description = this.facility.description
+      this.facilityDetails.bookable = this.facility.bookable
+    } else {
+      this.facilityDetails.name = ''
+      this.facilityDetails.description = ''
+      this.facilityDetails.bookable = false
+    }
   },
   methods: {
     submitFacility(): void {
       this.loading = true
-      this.$emit('closeClassModal')
-      this.$facilitiesApi
-        .create(this.facilityDetails)
-        .then((res) => {
-          console.log(res)
-          this.loading = false
-          this.$message.success('Category Created Successfully!')
-        })
-        .catch((err) => {
-          if (err?.data) {
-            this.$message.error('An Error Occured!')
-          }
 
-          console.log(err)
-        })
+      if (this.isEdit) {
+        this.$facilitiesApi
+          .update(this.facilityDetails.id, this.facilityDetails)
+          .then(() => {
+            this.loading = false
+            this.$message.success('Facility Updated Successfully!')
+            this.$emit('closeAddFacilityModal')
+          })
+          .catch((error) => {
+            ;(this as any as IMixinState).catchError(error)
+          })
+      } else {
+        const facility = {
+          name: this.facilityDetails.name,
+          description: this.facilityDetails.description,
+          bookable: this.facilityDetails.bookable,
+        }
+
+        this.$facilitiesApi
+          .create(facility)
+          .then((res) => {
+            console.log(res)
+            this.loading = false
+            this.$message.success('Facility Created Successfully!')
+            this.$emit('closeAddFacilityModal')
+          })
+          .catch((error) => {
+            ;(this as any as IMixinState).catchError(error)
+          })
+      }
     },
   },
 })

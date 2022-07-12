@@ -1,11 +1,10 @@
 <template>
   <div>
     <ModalHandler ref="modalAction" />
-    <DeleteModal
+    <DeleteHandler
       ref="deleteAction"
-      file="facility"
       @confirmDelete="deleteCategory"
-    ></DeleteModal>
+    ></DeleteHandler>
 
     <el-row :gutter="10" class="mb-2 mt-40">
       <el-col :sm="21" :md="21">
@@ -54,7 +53,7 @@
               type="danger"
               icon="el-icon-delete"
               circle
-              @click="deleteCategoryModal(props.row._id)"
+              @click="confirmDeleteCategory(props.row._id)"
             ></el-button>
           </template>
         </el-table-column>
@@ -76,6 +75,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { IMixinState } from '@/types/mixinsTypes'
 
 export default Vue.extend({
   name: 'Clients',
@@ -93,17 +93,23 @@ export default Vue.extend({
       const categories = await this.$categoriesApi.get()
       this.categoriesData = categories.data
       this.tableLoading = false
-    } catch (err) {
-      console.log(err)
+    } catch (error) {
+      ;(this as any as IMixinState).catchError(error)
     }
   },
   methods: {
-    deleteCategoryModal(id: string) {
+    confirmDeleteCategory(id: string) {
       this.categoryId = id
       ;(this as any).$refs.deleteAction.open()
     },
     deleteCategory() {
-      this.$categoriesApi.delete(this.categoryId).then(() => this.$fetch())
+      this.$categoriesApi.delete(this.categoryId).then(() => {
+        this.$fetch()
+        this.$message({
+          type: 'success',
+          message: 'Category Deleted successfully!',
+        })
+      })
     },
     showCategoryModal(): void {
       ;(this as any).$refs.modalAction.addCategoryModal(this.$fetch)

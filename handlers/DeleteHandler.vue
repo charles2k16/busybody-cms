@@ -6,6 +6,7 @@
 </template>
 <script>
 export default {
+  name: 'DeleteHandler',
   methods: {
     open() {
       this.$confirm(`This will permanently delete this. Continue?`, 'Warning', {
@@ -14,11 +15,7 @@ export default {
         type: 'warning',
       })
         .then(() => {
-          this.$message({
-            type: 'success',
-            message: 'Delete completed',
-          })
-          this.$emit('confirmDelete', 'comfirm')
+          this.$emit('confirmDelete')
         })
         .catch(() => {
           this.$message({

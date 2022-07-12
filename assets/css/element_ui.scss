@@ -48,8 +48,13 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 .el-button--plain:focus,
 .el-button--plain:hover {
-
   color: var(--color-primary);
+}
+
+.el-button--danger {
+  color: #FFF;
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
 }
 
 // menu items
@@ -246,4 +251,22 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 .el-progress-circle {
   height: 75px !important;
   width: 75px !important;
+}
+
+// paginnation
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: var(--color-primary);
+  color: #FFF;
+}
+// radio
+.el-radio-button__orig-radio:checked+.el-radio-button__inner {
+  color: #FFF;
+  background-color:  var(--color-primary);
+  border-color:  var(--color-primary);
+  box-shadow: -1px 0 0 0  var(--color-primary);
+}
+.el-tag {
+    background-color: #f4d9ff;
+    border-color: #f4d9ff;
+    color: var(--color-primary);
 }

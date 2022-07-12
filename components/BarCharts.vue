@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%; height: 300px; max-height: 300px">
+  <div style="width: 100%">
     <client-only placeholder="Loading...">
       <lineChart
         :chart-options="barChartOptions"

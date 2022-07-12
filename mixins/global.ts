@@ -1,12 +1,20 @@
 import Vue from "vue";
 import { IMixinState } from '@/types/mixinsTypes'
 const ModalHandler = () => import( '../handlers/ModalHandler.vue' )
+const DeleteHandler = () => import( '../handlers/DeleteHandler.vue' )
 
 export default Vue.extend( {
   components: {
     ModalHandler,
+    DeleteHandler
   },
   methods: <IMixinState> {
+    catchError ( error: any ) {
+      const err = Object.assign( {}, error )
+      const message = err.response.data.message
+
+      this.getNotification( message, 'error' )
+    },
     todaysDAteInText () {
       return new Date().toDateString();
     },

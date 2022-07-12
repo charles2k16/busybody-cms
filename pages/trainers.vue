@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ModalHandler ref="handleAction" />
+    <ModalHandler ref="modalAction" />
     <UpdateModalHandler ref="updateAction" />
     <DeleteModal
       ref="deleteAction"
@@ -30,6 +30,13 @@
 
     <el-card class="mt-40">
       <el-table v-loading="tableLoading" :data="trainersData" stripe>
+        <el-table-column type="expand">
+          <template #default="props">
+            <p><b>Address:</b> {{ props.row.address }}</p>
+            <br />
+            <p><b>Location:</b> {{ props.row.location }}</p>
+          </template>
+        </el-table-column>
         <el-table-column label="Details">
           <template #default="props">
             <div class="d-flex">
@@ -45,9 +52,16 @@
           </template>
         </el-table-column>
 
+        <el-table-column label="Phone">
+          <template #default="props">
+            <span class="center">{{ props.row.phone }}</span>
+          </template>
+        </el-table-column>
+
         <el-table-column label="Num. of Classes">
           <template #default="props">
-            <span class="center">{{ props.row.classNumber }}</span>
+            <span class="center">{{ props.row.classNumber }}</span> <br />
+            <span>Avrg Capacity: 25 students</span>
           </template>
         </el-table-column>
         <el-table-column label="Last Active">
@@ -110,7 +124,7 @@ export default Vue.extend({
     return {
       search: '' as string,
       trainersData: [] as Array<object>,
-      tableLoading: true as boolean,
+      tableLoading: false as boolean,
       trainerId: '' as string,
       queryParams: {
         page: 1 as number,
@@ -119,6 +133,7 @@ export default Vue.extend({
     }
   },
   async fetch() {
+    this.tableLoading = true
     try {
       const trainers = await this.$rolesApi.get('/trainers', this.queryParams)
       this.loadDataTable(trainers.data)
@@ -154,7 +169,7 @@ export default Vue.extend({
       // this.$trainersApi.delete(this.trainerId).then(() => this.$fetch())
     },
     addTrainerModal(): void {
-      ;(this as any).$refs.handleAction.addTrainerModal(this.$fetch)
+      ;(this as any).$refs.modalAction.addTrainersModal(this.$fetch)
     },
   },
 })

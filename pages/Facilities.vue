@@ -1,11 +1,10 @@
 <template>
   <div>
-    <ModalHandler ref="handleAction" />
-    <UpdateModalHandler ref="updateAction" />
-    <DeleteModal
+    <ModalHandler ref="modalAction" />
+    <DeleteHandler
       ref="deleteAction"
       @confirmDelete="deleteFacility"
-    ></DeleteModal>
+    ></DeleteHandler>
 
     <el-row :gutter="10" class="mb-2 mt-40">
       <el-col :sm="21" :md="21">
@@ -39,7 +38,7 @@
         <el-table-column label="Bookable" align="center">
           <template #default="props">
             <el-tag
-              :type="props.row.bookable === false ? 'danger' : 'info'"
+              :type="props.row.bookable === false ? 'danger' : 'primary'"
               size="small"
             >
               <b> {{ props.row.bookable === false ? 'No' : 'Yes' }}</b>
@@ -58,14 +57,14 @@
                 type="primary"
                 icon="el-icon-edit"
                 circle
-                @click="updateFacilityModal(props.row)"
+                @click="showUpdateModal(props.row)"
               ></el-button>
             </el-tooltip>
             <el-button
               type="danger"
               icon="el-icon-delete"
               circle
-              @click="deleteFacilityModal(props.row._id)"
+              @click="confirmDeleteFacility(props.row._id)"
             ></el-button>
           </template>
         </el-table-column>
@@ -87,13 +86,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import UpdateModalHandler from '@/handlers/UpdateModalHandler.vue'
+import { IMixinState } from '@/types/mixinsTypes'
 
 export default Vue.extend({
-  name: 'Clients',
-  components: {
-    UpdateModalHandler,
-  },
+  name: 'Facilities',
   data() {
     return {
       search: '' as string,
@@ -106,28 +102,38 @@ export default Vue.extend({
     try {
       const facilities = await this.$facilitiesApi.get()
       this.facilitiesData = facilities.data
-      console.log(facilities)
       this.tableLoading = false
-    } catch (err) {
-      console.log(err)
+    } catch (error) {
+      ;(this as any as IMixinState).catchError(error)
     }
   },
   methods: {
-    deleteFacilityModal(id: string) {
+    confirmDeleteFacility(id: string) {
       this.facilityId = id
       ;(this as any).$refs.deleteAction.open()
     },
-    updateFacilityModal(facility: object) {
-      ;(this as any).$refs.updateAction.updateFacilityModal(
+    showUpdateModal(facility: object) {
+      ;(this as any).$refs.modalAction.updateFacilityModal(
         this.$fetch,
         facility
       )
     },
     deleteFacility() {
-      this.$facilitiesApi.delete(this.facilityId).then(() => this.$fetch())
+      this.$facilitiesApi
+        .delete(this.facilityId)
+        .then(() => {
+          this.$fetch()
+          this.$message({
+            type: 'success',
+            message: 'Facility Deleted successfully!',
+          })
+        })
+        .catch((error) => {
+          ;(this as any as IMixinState).catchError(error)
+        })
     },
     showFacilityModal(): void {
-      ;(this as any).$refs.handleAction.addFacilityModal(this.$fetch)
+      ;(this as any).$refs.modalAction.addFacilityModal(this.$fetch)
     },
   },
 })

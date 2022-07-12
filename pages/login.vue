@@ -23,6 +23,7 @@
             <el-form-item>
               <el-input
                 v-model="loginForm.password"
+                type="password"
                 class="bb_input"
                 placeholder="Enter password"
               ></el-input>

@@ -81,7 +81,6 @@ export default Vue.extend({
             if (err?.data) {
               this.$message.error('An Error Occured!')
             }
-
             console.log(err)
           })
       } else {

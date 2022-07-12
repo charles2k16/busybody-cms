@@ -1,6 +1,7 @@
 :root {
   --text-base: #101011;
   --color-primary: #440a66;
+  --color-danger: #f73030;
   --text-white: #ffffff;
   --font-primary: busybCircular_std;
   --font-primary-bold: busybCircular_bold;

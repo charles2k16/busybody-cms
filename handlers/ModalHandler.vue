@@ -4,6 +4,7 @@
     <el-dialog
       :visible.sync="showAddClassModal"
       width="40%"
+      :before-close="closeAddClassModal"
       :destroy-on-close="true"
       custom-class="mobile-modal"
     >
@@ -15,9 +16,10 @@
       </template>
       <AddClasses @closeClassModal="closeAddClassModal" />
     </el-dialog>
+
     <el-dialog
       :visible.sync="showAddFacilityModal"
-      width="40%"
+      width="30%"
       :destroy-on-close="true"
       custom-class="mobile-modal"
     >
@@ -27,8 +29,14 @@
           All fields should be filled for accurate facility filtering.
         </p>
       </template>
-      <AddFacility @closeAddFacilityModal="closeAddFacilityModal" />
+      <AddFacility
+        v-if="showAddFacilityModal"
+        :facility="updateData"
+        :is-edit="isEdit"
+        @closeAddFacilityModal="closeAddFacilityModal"
+      />
     </el-dialog>
+
     <el-dialog
       :visible.sync="showAddCategoryModal"
       width="25%"
@@ -39,13 +47,14 @@
         <h3>{{ modalTitle }}</h3>
       </template>
       <AddCategory
-        :category="category"
+        v-if="showAddCategoryModal"
+        :category="updateData"
         @closeCategoryModal="closeAddCategoryModal"
       />
     </el-dialog>
     <el-dialog
-      :visible.sync="showAddTrainerModal"
-      width="40%"
+      :visible.sync="showTrainersModal"
+      width="35%"
       :destroy-on-close="true"
       custom-class="mobile-modal"
     >
@@ -101,10 +110,11 @@ export default Vue.extend({
       showAddClientModal: false as boolean,
       showAddFacilityModal: false as boolean,
       showAddCategoryModal: false as boolean,
-      showAddTrainerModal: false as boolean,
+      showTrainersModal: false as boolean,
       showAddMemberModal: false as boolean,
       successFunc: null as any,
-      category: {} as any,
+      updateData: {} as any,
+      isEdit: false as boolean,
     }
   },
   methods: {
@@ -126,39 +136,58 @@ export default Vue.extend({
       this.closeModal(this.successFunc)
       this.showAddClientModal = false
     },
+
+    // facility modal
     addFacilityModal(refereshTable: any): void {
+      this.updateData = {}
+      this.isEdit = false
       this.modalTitle = 'Add Facility'
       this.successFunc = refereshTable
       this.showAddFacilityModal = true
     },
+    updateFacilityModal(refereshTable: any, facility: object): void {
+      this.updateData = {}
+      this.isEdit = true
+      this.modalTitle = 'Update Facility'
+      this.successFunc = refereshTable
+      this.updateData = facility
+      this.showAddFacilityModal = true
+    },
     closeAddFacilityModal() {
       this.closeModal(this.successFunc)
+      this.updateData = {}
       this.showAddFacilityModal = false
     },
+
+    // category modal
     addCategoryModal(refereshTable: any): void {
+      this.updateData = {}
       this.modalTitle = 'Add Category'
       this.successFunc = refereshTable
       this.showAddCategoryModal = true
     },
     updateCategoryModal(refereshTable: any, category: object): void {
+      this.updateData = {}
       this.modalTitle = 'Update Category'
-      this.category = category
       this.successFunc = refereshTable
+      this.updateData = category
       this.showAddCategoryModal = true
     },
     closeAddCategoryModal() {
       this.closeModal(this.successFunc)
+      this.updateData = {}
       this.showAddCategoryModal = false
-      this.category = {}
     },
-    addTrainerModal(refereshTable: any): void {
+
+    // users modal
+    addTrainersModal(refereshTable: any): void {
       this.modalTitle = 'Add Trainer'
       this.successFunc = refereshTable
-      this.showAddTrainerModal = true
+      this.showTrainersModal = true
     },
     closeAddTrainerModal() {
       this.closeModal(this.successFunc)
-      this.showAddTrainerModal = false
+      this.showTrainersModal = false
     },
     addMemberModal(refereshTable: any): void {
       this.modalTitle = 'Add Member'
